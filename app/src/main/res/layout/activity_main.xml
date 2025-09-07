@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+
+    >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/myToolbar"
+        android:layout_width="0dp"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- العنوان في النص بالضبط -->
+            <TextView
+                android:id="@+id/customToolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="تبادلاتي"
+                android:textColor="@color/blackDark"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.533" />
+
+            <!-- زر الرجوع على اليمين -->
+<!--            <ImageButton-->
+<!--                android:id="@+id/backButton"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:padding="0dp"-->
+<!--                android:src="@drawable/ic_arrow_back"-->
+<!--                android:contentDescription="رجوع"-->
+<!--                android:scaleType="centerInside"-->
+<!--                android:background="@android:color/transparent"-->
+<!--                android:paddingStart="0dp"-->
+<!--                android:visibility="gone"-->
+<!--                android:layout_marginStart="0dp"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:fitsSystemWindows="true">
+
+        <!-- AppBar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layoutDirection="rtl"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="12dp"
+            app:title=""
+            app:navigationIcon="@null">
+
+            <!-- الهيدر -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layoutDirection="rtl">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/user_icon"
+                    android:scaleType="centerCrop"
+                    android:padding="2dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CircularImage" />
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:paddingStart="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="مرحباً بك ، asmaa"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/blackDark"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <!-- المحتوى تحت AppBar -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="56dp"
+            android:fillViewport="true"
+            android:layoutDirection="rtl"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- مربع البحث -->
+                <EditText
+                    android:id="@+id/searchBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="ابحث عن المنتجات..."
+                    android:background="@drawable/search_background"
+                    android:padding="12dp"
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:textDirection="rtl"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:inputType="text"
+                    android:layout_marginTop="12dp" />
+
+                <!-- ✅ هذا هو المحتوى الرئيسي -->
+                <LinearLayout
+                    android:id="@+id/homeContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="التصنيفات"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackDark"
+                        android:layout_marginTop="16dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/categoryRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="117dp"
+                        android:layout_marginTop="12dp"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="المنتجات الجديدة في منطقتك"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackDark"
+                        android:layout_marginTop="12dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/newItemsRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="283dp"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="جميع المنتجات"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackDark"
+                        android:layout_marginTop="16dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/cardRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
+                        android:overScrollMode="never" />
+                </LinearLayout>
+
+                <!-- ✅ RecyclerView للبحث -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/searchResultsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="16dp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+
+
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:elevation="10dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cnb_backgroundColor="@color/my_custom_text"
+        app:cnb_menuResource="@menu/bottom_nav_menu" />
+
+
+
+
+
+
+    <fragment
+        android:id="@+id/nav_host_fragment_activity_main"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintTop_toBottomOf="@id/myToolbar"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

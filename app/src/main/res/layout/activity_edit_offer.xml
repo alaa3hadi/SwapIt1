@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:paddingTop="0dp"
+    android:paddingBottom="24dp">
+
+    <!-- الشريط العلوي -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:layoutDirection="rtl"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="رجوع"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:layout_gravity="start|center_vertical"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="تعديل العرض"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:fillViewport="true"
+        android:layoutDirection="rtl"
+        android:textDirection="rtl"
+        android:paddingHorizontal="16dp"
+        android:scrollbars="none">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        android:orientation="vertical"
+        android:paddingTop="0dp"
+        android:paddingBottom="24dp">
+
+
+        <!-- قسم الصور (يمكنك تعديل لعرض الصور القديمة أو تعديلها) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+
+            <!-- قسم الصور -->
+            <FrameLayout
+                android:id="@+id/photoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:id="@+id/addPhotoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:background="@drawable/photo_frame_border"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <FrameLayout
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/circle_background"
+                        android:elevation="4dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/pencil"
+                            app:tint="@color/black" />
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="عدل صورة المنتج"
+                        android:textColor="#555555"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPagerImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_marginBottom="8dp"
+                        android:visibility="gone" />
+
+                    <me.relex.circleindicator.CircleIndicator3
+                        android:id="@+id/indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="6dp"
+                        android:visibility="gone"
+                        app:ci_drawable="@drawable/tab_selector"
+                        app:ci_drawable_unselected="@drawable/tab_unselected"
+                        app:ci_gravity="center" />
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/imageError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"
+                android:text="* يمكنك تعديل الصور الحالية أو إضافة أخرى"
+                android:textColor="#555555"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- اسم المنتج مع أيقونة تعديل -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اسم المنتج"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" *"
+                android:textColor="#F9BC25"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_outline_background">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/productNameNeedEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:textColor="#000000"
+                android:textDirection="rtl"
+                android:textSize="16sp"
+                android:background="@null"
+                android:text="اسم المنتج القديم هنا" />
+
+            <ImageView
+                android:id="@+id/editProductNeedNameIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/edit"
+                app:tint="#555555" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اسم المنتج المطلوب"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" *"
+                android:textColor="#F9BC25"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_outline_background">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/productNameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingStart="16dp"
+                android:paddingEnd="48dp"
+                android:textColor="#000000"
+                android:textDirection="rtl"
+                android:textSize="16sp"
+                android:background="@null"
+                android:text="اسم المنتج القديم هنا" />
+
+            <ImageView
+                android:id="@+id/editProductNameIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/edit"
+                app:tint="#555555" />
+        </RelativeLayout>
+
+
+        <!-- القسم مع أيقونة تعديل -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="القسم"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" *"
+                android:textColor="#F9BC25"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_outline_background">
+
+            <AutoCompleteTextView
+                android:id="@+id/categorySpinner"
+                style="@style/Widget.AppCompat.AutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:clickable="true"
+                android:focusable="false"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingStart="20dp"
+                android:paddingEnd="48dp"
+                android:singleLine="true"
+                android:text="القسم القديم هنا"
+                android:textColor="#000000"
+                android:textDirection="rtl"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/baseline_keyboard_arrow_down_24"
+                app:tint="#555555" />
+        </RelativeLayout>
+
+        <!-- الموقع مع أيقونة تعديل -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="الموقع"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" *"
+                android:textColor="#F9BC25"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_outline_background">
+
+            <AutoCompleteTextView
+                android:id="@+id/locationSpinner"
+                style="@style/Widget.AppCompat.AutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:clickable="true"
+                android:focusable="false"
+                android:gravity="right|center_vertical"
+                android:layoutDirection="rtl"
+                android:paddingStart="20dp"
+                android:paddingEnd="48dp"
+                android:singleLine="true"
+                android:text="الموقع القديم هنا"
+                android:textColor="#000000"
+                android:textDirection="rtl"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/baseline_keyboard_arrow_down_24"
+                app:tint="#555555" />
+        </RelativeLayout>
+
+        <!-- الوصف مع أيقونة تعديل -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="الوصف"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" *"
+                android:textColor="#F9BC25"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/edittext_outline_background">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|right"
+                android:layoutDirection="rtl"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:paddingEnd="48dp"
+                android:textColor="#333333"
+                android:textDirection="rtl"
+                android:textSize="16sp"
+                android:background="@null"
+                android:text="الوصف القديم هنا" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/edit"
+                app:tint="#555555" />
+        </RelativeLayout>
+
+        <!-- زر التعديل -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/bottom"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_background"
+            android:elevation="4dp"
+            android:text=" حفظ التعديل"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            app:backgroundTint="@null"
+            app:cornerRadius="8dp" />
+
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

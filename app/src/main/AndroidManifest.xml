@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="SwapIt"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SwapIt1">
+        <activity
+            android:name=".ui.addOffer.addRequest"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.details.Offer_Details_general"
+            android:exported="false" />
+        <activity
+            android:name=".ui.details.My_Request_Details"
+            android:exported="false" />
+        <activity
+            android:name=".ui.details.request_details"
+            android:exported="false" />
+        <activity
+            android:name=".ui.details.offer_details"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myAccount.privacy_policy"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myAccount.edit_notifications"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myAccount.delete_account"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myAccount.contact_us"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myAccount.change_password"
+            android:exported="false" />
+        <activity
+            android:name=".ui.myAccount.edit_profile"
+            android:exported="false" />
+        <activity
+            android:name=".edit.edit_request"
+            android:exported="false" />
+        <activity
+            android:name=".edit.edit_offer"
+            android:exported="false" />
+        <activity
+            android:name=".ui.SpecificProductRequests"
+            android:exported="false"
+            android:label="@string/title_activity_specific_product_requests"
+            android:theme="@style/Theme.SwapIt1" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+           >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Registration.SignUpActivity"
+            android:exported="false" />
+
+        <activity android:name=".Onboarding.OnboardingActivity"
+            android:exported="false"
+            />
+        <activity android:name=".Onboarding.SplashActivity"
+            android:exported="false"
+            android:label="SwapIt"> </activity>
+
+
+        <activity
+            android:name=".Registration.LoginActivity"
+            android:exported="false"
+            android:label="SwapIt">
+
+        </activity>
+
+
+
+    </application>
+
+</manifest>

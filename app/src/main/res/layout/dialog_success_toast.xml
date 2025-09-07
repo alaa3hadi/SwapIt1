@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="18dp"
+    android:layout_width="250dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_background"
+    android:gravity="center"
+    android:layout_gravity="center">
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/swapit2" />
+
+    <TextView
+        android:text="تم قبول الطلب بنجاح"
+        android:textColor="@color/blackDark"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

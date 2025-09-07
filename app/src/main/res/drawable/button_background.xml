@@ -1,0 +1,9 @@
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33FFFFFF"> <!-- لون تأثير الضغط -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#F9BC25"/> <!-- لون الزر الأصلي -->
+            <corners android:radius="32dp"/> <!-- نفس الاستدارة -->
+        </shape>
+    </item>
+</ripple>

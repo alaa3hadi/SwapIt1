@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF">
+
+    <ListView
+        android:id="@+id/cardListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="14dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="16dp"
+         />
+
+    <LinearLayout
+        android:id="@+id/emptyLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:padding="16dp">
+
+        <!-- ✅ الصورة -->
+        <ImageView
+            android:id="@+id/emptyImage"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:src="@drawable/swapit2"
+
+        android:contentDescription="صورة توضيحية" />
+
+        <!-- ✅ النص -->
+        <TextView
+            android:id="@+id/emptyMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ليس لديك أي عروض حتى الآن"
+            android:textSize="22sp"
+            android:textColor="@color/blackDark"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ✅ الزر -->
+        <Button
+            android:id="@+id/addOfferButton"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="إضافة عرض"
+            android:textSize="16sp"
+            android:backgroundTint="@color/YellowDark"
+            app:cornerRadius="20dp"
+            android:textColor="@android:color/black"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

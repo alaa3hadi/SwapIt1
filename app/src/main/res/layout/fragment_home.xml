@@ -1,0 +1,263 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/topAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:layoutDirection="rtl"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:elevation="0dp"
+        app:title=""
+        app:navigationIcon="@null">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
+
+            <!-- صورة واسم -->
+            <LinearLayout
+                android:id="@+id/userInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layoutDirection="rtl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@drawable/user_icon"
+                    android:scaleType="centerCrop"
+                    android:padding="2dp"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CircularImage" />
+
+                <TextView
+                    android:id="@+id/userName"
+                    android:paddingStart="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="مرحباً بك ، asmaa"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/blackDark"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- أيقونة الإشعارات -->
+            <ImageView
+                android:id="@+id/notificationIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/notification"
+                android:contentDescription="إشعارات"
+                app:tint="@color/blackDark"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.MaterialToolbar>
+
+    <!-- المحتوى تحت AppBar -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:fillViewport="true"
+        android:layoutDirection="rtl"
+        android:background="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- مربع البحث -->
+            <LinearLayout
+                android:id="@+id/searchRow"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <EditText
+                    android:id="@+id/searchBox"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="ابحث عن المنتجات..."
+                    android:background="@drawable/search_background"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:drawableStart="@android:drawable/ic_menu_search"
+                    android:textDirection="rtl"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:inputType="text"/>
+
+                <ImageButton
+                    android:id="@+id/btnFilter"
+                    android:layout_width="48dp"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="فلترة"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_filter_list_24"
+                    app:tint="@color/blackDark"/>
+            </LinearLayout>
+
+            <!-- المحتوى الرئيسي -->
+            <LinearLayout
+                android:id="@+id/homeContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- التصنيفات -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="التصنيفات"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blackDark"
+                    android:layout_marginTop="16dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/categoryRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="117dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never" />
+
+                <!-- المنتجات الجديدة في منطقتك -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="12dp">
+
+                    <TextView
+                        android:id="@+id/tvAreaTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="المنتجات الجديدة في منطقتك"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackDark" />
+
+                    <TextView
+                        android:id="@+id/btnAreaViewAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="عرض الكل"
+                        android:textSize="14sp"
+                        android:textColor="@color/blackDark"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp" />
+                </LinearLayout>
+
+                <!-- شيمر قسم المنطقة -->
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:visibility="visible"
+                    app:shimmer_auto_start="true"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="12dp">
+
+                        <View android:layout_width="160dp" android:layout_height="100dp"
+                            android:layout_marginEnd="12dp" android:background="@drawable/skeleton_bg"/>
+                        <View android:layout_width="160dp" android:layout_height="100dp"
+                            android:layout_marginEnd="12dp" android:background="@drawable/skeleton_bg"/>
+                        <View android:layout_width="160dp" android:layout_height="100dp"
+                            android:background="@drawable/skeleton_bg"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newItemsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="283dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:visibility="gone"/>
+
+                <!-- جميع المنتجات -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="جميع المنتجات"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/blackDark"
+                    android:layout_marginTop="16dp" />
+
+                <!-- شيمر قسم جميع المنتجات -->
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerAll"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:visibility="visible"
+                    app:shimmer_auto_start="true"
+                    android:layout_marginTop="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <View android:layout_width="match_parent" android:layout_height="100dp"
+                            android:layout_marginBottom="12dp" android:background="@drawable/skeleton_bg"/>
+                        <View android:layout_width="match_parent" android:layout_height="100dp"
+                            android:background="@drawable/skeleton_bg"/>
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cardRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- نتائج البحث -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/searchResultsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

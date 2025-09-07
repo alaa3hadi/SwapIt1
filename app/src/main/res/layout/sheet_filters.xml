@@ -1,0 +1,123 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <!-- رأس -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="فلترة"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/btnClose"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="إغلاق"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"/>
+    </LinearLayout>
+
+    <!-- الترتيب -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="الترتيب حسب"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/YellowDark"
+        android:textStyle="bold"/>
+
+    <RadioGroup
+        android:id="@+id/groupSort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textDirection="rtl"
+        android:gravity="right"
+        >
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rbNewest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="مضاف حديثًا"
+            android:checked="true"/>
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rbOldest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="أقدم"/>
+    </RadioGroup>
+
+    <!-- الموقع -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="الموقع"
+        android:textStyle="bold" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipsLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        app:singleSelection="true"
+        app:selectionRequired="false"
+        app:singleLine="false"
+        app:chipSpacingHorizontal="8dp"
+        app:chipSpacingVertical="8dp" />
+
+    <!-- الفئة -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="الفئة"
+        android:textStyle="bold" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipsCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        app:singleSelection="true"
+        app:selectionRequired="false"
+        app:singleLine="false"
+        app:chipSpacingHorizontal="8dp"
+        app:chipSpacingVertical="8dp" />
+
+    <!-- الأزرار -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReset"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="إعادة تعيين"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnApply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="تطبيق"
+            android:layout_marginStart="12dp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:layoutDirection="rtl"
+    android:background="#FFFFFF">
+
+    <!-- الشريط العلوي -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:layoutDirection="rtl"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="رجوع"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:layout_gravity="start|center_vertical"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="تواصل معنا"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- المحتوى الرئيسي داخل ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layoutDirection="rtl">
+
+            <!-- سياسة الخصوصية -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="سياسة الخصوصية الخاصة بـ swapIt"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginTop="16dp" />
+
+            <!-- عنوان فرعي -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اتصل بنا"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginTop="24dp" />
+
+            <!-- صف البريد الإلكتروني -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="البريد الإلكتروني:"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+
+                <TextView
+                    android:id="@+id/emailTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="swapIt84@gmail.com"
+                    android:textSize="16sp"
+                    android:textColorLink="#2196F3"
+                    android:textStyle="bold"
+                    android:layout_marginStart="8dp"
+                    android:autoLink="email"
+                    android:linksClickable="true"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+            </LinearLayout>
+            <!-- رقم الهاتف -->
+            <TextView
+                android:id="@+id/phoneTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="رقم الهاتف: +972 59-504-0979"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColorLink="#2196F3"
+                android:autoLink="phone"
+                android:linksClickable="true"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginTop="8dp" />
+
+            <!-- العنوان -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="العنوان: غزة ،الرمال  ، برج كاظم ، الطابق الثالث"
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginTop="8dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

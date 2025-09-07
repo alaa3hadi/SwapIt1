@@ -1,0 +1,27 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:elevation="6dp">
+
+    <!-- الصورة -->
+    <ImageView
+        android:id="@+id/imgSelected"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@drawable/image_background"
+        android:clipToOutline="true" />
+
+    <!-- زر الحذف -->
+    <ImageButton
+        android:id="@+id/btnRemove"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="10dp"
+        android:background="@drawable/circle_background"
+        android:src="@drawable/baseline_close_24"
+       />
+
+</FrameLayout>

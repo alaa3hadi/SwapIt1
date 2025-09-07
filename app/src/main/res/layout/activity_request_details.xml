@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:layoutDirection="rtl">
+
+    <!-- الشريط العلوي -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:layoutDirection="rtl"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="رجوع"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:layout_gravity="start|center_vertical"
+
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text= "تفاصيل الطلب"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- المحتوى الرئيسي -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@+id/bottomActions"
+        android:fillViewport="true"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- صورة المنتج مع تأثير ظل محسن -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:strokeColor="#E0E0E0"
+                app:strokeWidth="0.5dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp">
+
+                    <!-- الصورة -->
+                    <ImageView
+                        android:id="@+id/productImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/flour" />
+
+                    <!-- سهم اليسار -->
+                    <ImageView
+                        android:id="@+id/arrowLeft"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical|start"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/circle_gray_photo"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_arrow_back"
+                        app:tint="#333333" />
+
+                    <!-- سهم اليمين -->
+                    <ImageView
+                        android:id="@+id/arrowRight"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/circle_gray_photo"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_arrow_back"
+                        android:rotation="180"
+                        app:tint="#333333"/>
+
+                </FrameLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- تفاصيل المنتج مع تصميم أنيق -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="12dp"
+                android:backgroundTint="#FFFFFF"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- اسم المنتج مع مسافة محسنة -->
+                    <TextView
+                        android:id="@+id/productName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:text="كيس سكر 5 كجم"
+                        android:textColor="#333333"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+
+                    <!-- القسم والموقع في صف واحد -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+
+                        <!-- القسم مع أيقونة -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginEnd="8dp"
+                                android:src="@drawable/menu"
+                                app:tint="#616161" />
+
+                            <TextView
+                                android:id="@+id/productCategory"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="مواد غذائية"
+                                android:textColor="#616161"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
+
+                        <!-- الموقع مع أيقونة -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginEnd="8dp"
+                                android:src="@drawable/placeholder"
+                                app:tint="#616161"/>
+
+                            <TextView
+                                android:id="@+id/productLocation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="غزة - حي الشجاعية"
+                                android:textColor="#616161"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- وصف المنتج مع فواصل واضحة -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="#EEEEEE"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="وصف المنتج"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/productDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="سكر أبيض ناعم من إنتاج شركة فلسطين للصناعات الغذائية، وزن 5 كيلو جرام، مغلف بجودة عالية ومناسب لجميع الاستخدامات المنزلية."
+                        android:textColor="#616161"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- معلومات الطالب مع تصميم أنيق -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                android:backgroundTint="#FFFFFF"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="0.5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="معلومات المقدم"
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- صورة الملف الشخصي مع ظل محسن -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:cardCornerRadius="30dp"
+                            app:strokeColor="#FFFFFF"
+                            app:strokeWidth="0.5dp">
+
+                            <ImageView
+                                android:id="@+id/userImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/p"
+                                android:contentDescription="صورة المستخدم"/>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/userName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="أحمد محمد"
+                                android:textColor="#333333"
+                                android:textSize="16sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/userPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="+970 59 123 4567"
+                                android:textColor="#757575"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
+
+                        <!-- أيقونات التواصل مع تصميم محسن -->
+                        <LinearLayout
+                            android:layout_width="82dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <ImageButton
+                                android:id="@+id/btnMessage"
+                                android:layout_width="40dp"
+                                android:layout_height="36dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="مراسلة"
+                                android:padding="8dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/chat"
+                                app:tint="#616161"/>
+
+                            <ImageButton
+                                android:id="@+id/btnCall"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="اتصال"
+                                android:padding="8dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/telephone"
+                                app:tint="#616161"/>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- أزرار التحكم المحسنة -->
+    <LinearLayout
+        android:id="@+id/bottomActions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:elevation="0dp"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnReject"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:text="رفض الطلب"
+                android:textColor="#F44336"
+                app:strokeColor="#F44336"
+                app:strokeWidth="1dp"
+                app:cornerRadius="8dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAccept"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#4CAF50"
+                android:text="قبول الطلب"
+                android:textColor="#FFFFFF"
+                app:cornerRadius="8dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

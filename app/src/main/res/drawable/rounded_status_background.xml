@@ -1,0 +1,9 @@
+<!-- res/drawable/rounded_status_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@android:color/transparent"/> <!-- الشفافية -->
+    <corners android:radius="20dp"/>
+    <stroke
+        android:width="2dp"
+        android:color="@android:color/darker_gray" /> <!-- هذا مؤقت بيتغير بالكود -->
+</shape>

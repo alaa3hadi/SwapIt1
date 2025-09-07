@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:layoutDirection="rtl">
+
+    <!-- المحتوى القابل للسكرول -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/btnExchangeCard"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- الشريط العلوي -->
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#FFFFFF"
+                android:layoutDirection="rtl"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp">
+
+                <ImageButton
+                    android:id="@+id/backButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:contentDescription="رجوع"
+                    android:scaleType="centerInside"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="start|center_vertical"
+
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" تفاصيل العرض "
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </androidx.appcompat.widget.Toolbar>
+            <!-- صورة المنتج -->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:id="@+id/imageCardView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="250dp"-->
+<!--                android:layout_margin="16dp"-->
+<!--                app:cardCornerRadius="12dp"-->
+<!--                app:cardElevation="4dp">-->
+
+                <!-- قسم الصور مع ViewPager2 -->
+                <FrameLayout
+                    android:id="@+id/photoContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewPagerImages"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginHorizontal="15dp"
+                            />
+
+                        <me.relex.circleindicator.CircleIndicator3
+                            android:id="@+id/indicator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="6dp"
+
+                            app:ci_drawable="@drawable/tab_selector"
+                            app:ci_drawable_unselected="@drawable/tab_unselected"
+                            app:ci_gravity="center" />
+                    </LinearLayout>
+                </FrameLayout>
+<!--            </androidx.cardview.widget.CardView>-->
+
+            <!-- محتوى الصفحة -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/btnExchangeCard"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp">
+
+                    <!-- اسم المنتج مع أيقونة -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/text_product_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="كيس طحين"
+                            android:textColor="#333333"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- المنتج المطلوب مع خلفية مميزة -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        app:cardBackgroundColor="#FFF8E1"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:layoutDirection="rtl"
+                            android:orientation="horizontal"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:layout_marginEnd="8dp"
+                                android:src="@drawable/exchange"
+                                app:tint="#4A4A4A" />
+
+                            <TextView
+                                android:id="@+id/text_requested_product"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="مطلوب: 5 كجم سكر أو 2 لتر زيت"
+                                android:textColor="#5D4037"
+                                android:textSize="16sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- معلومات الموقع والتاريخ -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:gravity="center_vertical"
+                        android:layoutDirection="rtl"
+                        android:orientation="horizontal">
+
+                        <!-- الموقع -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#F5F5F5"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/placeholder"
+                                    app:tint="#616161" />
+
+                                <TextView
+                                    android:id="@+id/text_location"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="غزة"
+                                    android:textColor="#616161"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- القسم -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#F5F5F5"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/menu"
+                                    app:tint="#616161" />
+
+                                <TextView
+                                    android:id="@+id/text_category"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="مواد غذائية"
+                                    android:textColor="#616161"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- التاريخ -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="#F5F5F5"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:padding="8dp">
+
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginEnd="8dp"
+                                    android:src="@drawable/clock"
+                                    app:tint="#616161" />
+
+                                <TextView
+                                    android:id="@+id/textPostDate"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="منذ يومين"
+                                    android:textColor="#616161"
+                                    android:textSize="12sp" />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="#EEEEEE" />
+
+                    <!-- معلومات المالك -->
+
+
+                    <!-- وصف المنتج -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        android:gravity="right"
+                        android:text="وصف المنتج"
+                        android:textColor="#333333"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="كيس طحين أبيض، جديد ومخزن بطريقة جيدة. نرغب بتبادله مقابل سكر أو زيت."
+                        android:textColor="#616161"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+    </ScrollView>
+    <!-- زر التبادل -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnExchangeCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp">
+
+        <Button
+            android:id="@+id/btn_exchange"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/gradient_button"
+            android:letterSpacing="0.02"
+            android:stateListAnimator="@null"
+            android:text="عرض الطلبات"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            app:backgroundTint="@null" />
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

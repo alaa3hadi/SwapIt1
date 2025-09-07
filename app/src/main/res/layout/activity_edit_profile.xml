@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layoutDirection="rtl">
+
+    <!-- الشريط العلوي -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:layoutDirection="rtl"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="رجوع"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:layout_gravity="start|center_vertical"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="تعديل الملف الشخصي"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- المحتوى -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="24dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- صورة المستخدم -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profileImage"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:contentDescription="صورة الملف الشخصي"
+                    android:src="@drawable/user"
+                    app:civ_border_color="#EEEEEE"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="تغيير الصورة"
+                    android:textColor="#F9BC25"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- الاسم -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="الاسم الكامل"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                app:boxBackgroundMode="none">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="الاء عبدالهادي"
+                    android:inputType="textPersonName"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- رقم الجوال -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="رقم الجوال"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/edittext_border"
+                app:boxBackgroundMode="none">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="+972 59-504-0979"
+                    android:inputType="phone"
+                    android:paddingStart="18dp"
+                    android:gravity="end"
+                    android:textDirection="rtl"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- الموقع -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="الموقع"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
+                android:background="@drawable/edittext_border"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/locationDropdown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_toStartOf="@id/location"
+                    android:background="@android:color/transparent"
+                    android:hint="غزة"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="36dp"
+                    android:textColorHint="#000000"
+                    android:inputType="none"
+                    android:focusable="true"
+                    android:clickable="true"
+                    android:focusableInTouchMode="false" />
+
+
+
+                <ImageView
+                    android:id="@+id/location"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/baseline_keyboard_arrow_down_24"
+                    app:tint="#000000" />
+            </RelativeLayout>
+
+            <!-- زر الحفظ -->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_background"
+
+                android:text="حفظ التعديلات"
+                android:textColor="#FFFFFF"
+                android:elevation="8dp"
+                android:translationZ="2dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@null"
+                android:layout_marginBottom="20dp"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,42 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.SwapIt1" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/YellowLight</item>
+        <item name="colorPrimaryVariant">@color/blackDark</item>
+        <item name="colorOnPrimary">@color/blackDark</item>
+
+         Secondary brand color.
+                <item name="colorSecondary">@color/blue</item>
+                <item name="colorSecondaryVariant">@color/grey</item>
+                <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/YellowLight</item>
+        <!-- Customize your theme here. -->
+
+        <item name="android:textColorPrimary">#000000</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="materialButtonOutlinedStyle">@style/CustomOutlineButton</item>
+
+
+
+
+    </style>
+    <style name="CustomOutlineButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="strokeColor">@color/YellowDark</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/blackDark</item>
+    </style>
+
+
+    <style name="BottomNavText" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+
+</resources>

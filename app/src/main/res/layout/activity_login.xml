@@ -1,0 +1,114 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_delivery"
+    android:layoutDirection="rtl">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/login_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="30dp"
+        app:cardPreventCornerOverlap="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:layoutDirection="rtl">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="تسجيل الدخول"
+                android:textColor="#333"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
+            <!-- رقم الجوال -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPhone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:hintEnabled="false"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="رقم الجوال"
+                    android:inputType="phone"
+                    android:textDirection="rtl"
+                    android:gravity="right"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- كلمة المرور -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:hintEnabled="false"
+                app:errorEnabled="true"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="كلمة المرور"
+
+                    android:inputType="textPassword"
+                    android:textDirection="rtl"
+                    android:gravity="right"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/forgotPasswordText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="هل نسيت كلمة المرور؟"
+                android:textSize="14sp"
+                android:textColor="#555"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="start"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/loginButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="دخول"
+                android:layout_marginTop="16dp"
+                android:textColor="#000"
+                app:backgroundTint="@null"
+                android:background="@drawable/rounded_button" />
+
+            <TextView
+                android:id="@+id/goToSignup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ليس لديك حساب؟ سجل الآن"
+                android:textSize="14sp"
+                android:textColor="#333"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

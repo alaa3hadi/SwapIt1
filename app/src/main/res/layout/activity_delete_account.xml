@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:layoutDirection="rtl">
+    <!-- الشريط العلوي -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:layoutDirection="rtl"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="رجوع"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:layout_gravity="start|center_vertical"
+
+            android:visibility="visible" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="حذف الحساب"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- محتوى الصفحة -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:padding="24dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- تحذير مهم -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⚠ تنبيه هام"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#D32F2F"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="حذف الحساب عملية دائمة ولا يمكن التراجع عنها"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- تأثيرات الحذف -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="عند الحذف سيتم:"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginBottom="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• حذف جميع بياناتك الشخصية"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/warning"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• إزالة جميع عمليات التبادل والسجل"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/warning"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="• فقدان جميع النقاط والعروض"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/warning"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+            <!-- أسباب الحذف -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="سبب الحذف (اختياري)"
+                android:layout_marginBottom="16dp"
+                app:boxBackgroundMode="outline"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusBottomEnd="8dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/deleteReasonInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:inputType="textMultiLine"
+                    android:gravity="top|right"
+                    android:background="@color/white"
+                    android:padding="12dp"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- تأكيد الحذف -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#FFF6F6"
+                app:strokeColor="#FFCDD2"
+                app:strokeWidth="1dp"
+                app:cardCornerRadius="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+
+
+                    <CheckBox
+                        android:id="@+id/confirmCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:buttonTint="#D32F2F"
+                        android:text=" أنا أدرك أن حذف الحساب نهائي ولا يمكن استعادة البيانات"
+                        android:textColor="#D32F2F"
+                        android:textSize="14sp"
+                        android:layout_marginStart="8dp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- زر الحذف -->
+            <Button
+                android:id="@+id/deleteAccountButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="حذف الحساب بشكل دائم"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#D32F2F"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:elevation="0dp"
+                android:enabled="false"
+                app:cornerRadius="24dp"/>
+
+            <!-- بدائل مقترحة -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="بدائل مقترحة:"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• يمكنك تعديل إعدادات الخصوصية بدلاً من الحذف"
+                android:textSize="14sp"
+                android:textColor="#333333"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• تعطيل الإشعارات المؤقتة"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• التواصل مع الدعم الفني لحل أي مشاكل"
+                android:textSize="14sp"
+                android:textColor="#333333"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

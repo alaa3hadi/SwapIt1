@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/myofferCard"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    android:padding="16dp"
+    app:cardBackgroundColor="@color/black"
+    android:outlineSpotShadowColor="@color/black"
+    android:backgroundTint="#f8f8f8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:layoutDirection="rtl">
+
+        <FrameLayout
+            android:layout_width="105dp"
+            android:layout_height="95dp"
+            android:layout_margin="6dp"
+            android:background="@drawable/image_border"
+            android:padding="3dp"
+            android:clipToOutline="true">
+
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_corners"
+                android:clipToOutline="true" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:layoutDirection="rtl"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="8dp">
+
+                <TextView
+                    android:id="@+id/itemTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="8dp"
+                    android:text="سماعات بلوتوث"
+                    android:textColor="@color/blackDark"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/itemTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="8dp"
+                    android:text="منذ 3 ساعات"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/itemExchange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:paddingStart="17dp"
+                android:text="للتبديل على: طحين"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <!-- موجودين بالتصميم الأصلي لكن هنخفيهم في الأدابتر -->
+
+            <!-- سطر المكان -->
+            <LinearLayout
+                android:id="@+id/locationRow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:paddingStart="17dp"
+
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/locationIcon"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_location_on_24"
+                    app:tint="@color/YellowDark" />
+
+                <TextView
+                    android:id="@+id/locationText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="غزة - الرمال"
+                    android:textColor="#FFC107"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl"
+    android:background="#FFFFFF">
+
+    <!-- الشريط العلوي -->
+
+    <!-- المحتوى -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:layoutDirection="rtl"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="start|center_vertical"
+            android:background="@android:color/transparent"
+            android:contentDescription="رجوع"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_arrow_back"
+
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="سياسة الخصوصية"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- العنوان -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="سياسة الخصوصية لـ SwapIt"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:layout_marginBottom="8dp" />
+
+            <!-- التاريخ -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="آخر تحديث: ١ يناير ٢٠٢٣"
+                android:textSize="14sp"
+                android:textColor="#777777"
+                android:layout_marginBottom="16dp" />
+
+            <!-- المقدمة -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="نحن في SwapIt نقدّر خصوصيتك ونلتزم بحماية بياناتك الشخصية. توضح هذه السياسة كيفية جمعنا واستخدامنا ومشاركة معلوماتك."
+                android:textSize="16sp"
+                android:textColor="#333333"
+                android:layout_marginBottom="16dp" />
+
+            <!-- الأقسام -->
+            <!-- قالب قسم -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="#F9F9F9"
+                android:layout_marginTop="8dp"
+                android:clipToOutline="true"
+                android:background="@drawable/bg_card_privacy">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="١. المعلومات التي نجمعها"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="- المعلومات التي تقدمها عند التسجيل (الاسم، البريد الإلكتروني، رقم الهاتف)\n- معلومات المعاملات والتبادلات\n- بيانات الاستخدام وتفضيلات التطبيق\n- معلومات الجهاز وعنوان IP"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+            <!-- ٢. كيفية استخدام المعلومات -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_card_privacy">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="٢. كيفية استخدام معلوماتك"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="- لتوفير وتحسين خدماتنا\n- لتسهيل عمليات التبادل بين المستخدمين\n- للتواصل معكم بشأن التحديثات والعروض\n- لأغراض الأمان ومنع الاحتيال"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+            <!-- ٣. مشاركة المعلومات -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_card_privacy">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="٣. مشاركة المعلومات"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="لا نبيع أو نؤجر بياناتك الشخصية لطرف ثالث. قد نشارك معلومات محدودة مع:\n- مزودي الخدمات الذين يساعدوننا في تشغيل التطبيق\n- السلطات القانونية عند الضرورة بموجب القانون"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+            <!-- ٤. حماية البيانات -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_card_privacy">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="٤. حماية البيانات"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="نستخدم إجراءات أمنية فنية وإدارية لحماية بياناتك، بما في ذلك:\n- تشفير البيانات الحساسة\n- أنظمة حماية من الاختراق\n- تقييد الوصول للموظفين"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+            <!-- ٥. حقوقك -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_card_privacy">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="٥. حقوقك"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="لديك الحق في:\n- الوصول إلى بياناتك الشخصية\n- طلب تصحيح المعلومات غير الدقيقة\n- طلب حذف بياناتك في بعض الحالات\n- الاعتراض على معالجة بياناتك"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+            <!-- ٦. التغييرات على السياسة -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:padding="16dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/bg_card_privacy">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="٦. التغييرات على السياسة"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="قد نحدّث هذه السياسة من وقت لآخر. سنعلمكم بأي تغييرات جوهرية عبر التطبيق أو البريد الإلكتروني."
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+            <!-- ٧. تواصل معنا -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                android:padding="16dp"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_card_privacy">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="٧. تواصل معنا"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="لأية استفسارات حول سياسة الخصوصية:\n\nالبريد الإلكتروني: privacy@swapit.com\nرقم الهاتف: +972 59-504-0979"
+                    android:textSize="16sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

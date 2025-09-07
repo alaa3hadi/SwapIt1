@@ -1,0 +1,9 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@android:color/transparent" />
+
+    <stroke
+        android:width="2dp"
+        android:color="@color/YellowDark" /> <!-- اللون اللي بدك إياه -->
+    <corners android:radius="16dp" /> <!-- لازم يتطابق مع radius تبع Glide -->
+</shape>

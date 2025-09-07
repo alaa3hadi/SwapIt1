@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarCategory"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:layoutDirection="rtl"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_back"
+            android:contentDescription="رجوع"
+            android:scaleType="centerInside"
+            android:background="@android:color/transparent"
+            android:layout_gravity="start|center_vertical" />
+
+        <TextView
+            android:id="@+id/textCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="تصنيف"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- شيمر أثناء التحميل -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        app:shimmer_auto_start="true"
+        app:shimmer_duration="1200">
+
+        <!-- سكلتون بسيط (تكرار لعدة عناصر) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- بطاقة 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/skeleton_bg" />
+
+                <View
+                    android:layout_width="70dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/skeleton_bg" />
+
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/skeleton_bg" />
+            </LinearLayout>
+
+            <!-- بطاقة 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="16dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/skeleton_bg" />
+
+                <View
+                    android:layout_width="60dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/skeleton_bg" />
+
+                <View
+                    android:layout_width="45dp"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/skeleton_bg" />
+            </LinearLayout>
+
+            <!-- بطاقة 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:background="@drawable/skeleton_bg" />
+
+                <View
+                    android:layout_width="65dp"
+                    android:layout_height="16dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/skeleton_bg" />
+
+                <View
+                    android:layout_width="40dp"
+                    android:layout_height="14dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/skeleton_bg" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <!-- القائمة -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="12dp"
+        android:visibility="gone" />
+</LinearLayout>

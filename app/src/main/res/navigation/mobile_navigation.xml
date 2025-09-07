@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.swapit1.ui.home.HomeFragment"
+        android:label="Home">
+
+        <action
+            android:id="@+id/action_navigationHome_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_navigationHome_to_areaOffersFragment"
+            app:destination="@id/areaOffersFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.swapit1.ui.dashboard.DashboardFragment"
+        android:label="سجل التبادل"
+
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_addOffer"
+        android:name="com.example.swapit1.ui.addOffer.addOfferFragment"
+        android:label="إضافة عرض"
+        tools:layout="@layout/fragment_add_offer" >
+
+        <action
+            android:id="@+id/action_addOfferFragment_to_homeFragment"
+            app:destination="@id/navigation_home" />
+    </fragment>
+
+
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.swapit1.ui.notifications.NotificationsFragment"
+        android:label="الإشعارات"
+        tools:layout="@layout/fragment_notifications"
+
+        />
+
+    <fragment
+        android:id="@+id/navigation_myAccount"
+        android:name="com.example.swapit1.ui.myAccount.accountFragment"
+        android:label="حسابي"
+
+        tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.swapit1.ui.Category.CategoryFragment"
+        android:label="Category">
+        <argument
+            android:name="categoryName"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/areaOffersFragment"
+        android:name="com.example.swapit1.ui.area.AreaOffersFragment"
+        android:label="عروض منطقتك">
+        <argument
+            android:name="areaName"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+</navigation>

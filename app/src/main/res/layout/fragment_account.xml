@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:layoutDirection="rtl">
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="vertical">-->
+
+
+<!--        <androidx.appcompat.widget.Toolbar-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="?attr/actionBarSize"-->
+<!--            android:background="#FFFFFF"-->
+<!--            android:elevation="4dp"-->
+<!--            android:layoutDirection="rtl"-->
+<!--            android:paddingStart="16dp"-->
+<!--            android:paddingEnd="16dp">-->
+
+<!--            <ImageButton-->
+<!--                android:id="@+id/backButton"-->
+<!--                android:layout_width="30dp"-->
+<!--                android:layout_height="30dp"-->
+<!--                android:layout_gravity="start|center_vertical"-->
+<!--                android:background="?attr/selectableItemBackgroundBorderless"-->
+<!--                android:contentDescription="رجوع"-->
+<!--                android:src="@drawable/ic_arrow_back"-->
+<!--                app:tint="#333333"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/pageTitle"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="الملف الشخصي"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textStyle="bold"-->
+<!--                android:textColor="#1A1A1A"-->
+<!--                android:layout_gravity="center"/>-->
+<!--        </androidx.appcompat.widget.Toolbar>-->
+
+        <!-- محتوى الصفحة مع تحسين المسافات -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- صورة الملف الشخصي مع مسافات محسنة -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="-15dp"
+                android:layout_marginBottom="32dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ownerImage"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/p"
+                    android:contentDescription="صورة المالك"
+                    android:scaleType="centerCrop"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="8dp"
+                    app:civ_border_width="3dp"
+                    app:civ_border_color="#F9BC25"
+                    android:elevation="6dp"
+                    android:transitionName="profileImageTransition"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"/>
+
+                <TextView
+                    android:id="@+id/profileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="الاء عمر عبد الهادي"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A1A"/>
+
+                <TextView
+                    android:id="@+id/profilePhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+972 59-504-0979"
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textDirection="rtl"
+                    android:textColor="#F9BC25"
+                    android:layout_marginTop="12dp"/>
+            </LinearLayout>
+
+            <!-- قسم الإحصائيات (مشابه للتصميم في الصورة) -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="#FAFAFA"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- الحاوية المحسنة مع تأثيرات احترافية -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="18dp"
+                app:cardBackgroundColor="#F9F9F9"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingVertical="8dp">
+
+                    <!-- معلوماتي -->
+                    <LinearLayout
+                        android:id="@+id/profileEditLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="16dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/user"
+                            app:tint="#4A4A4A"
+                            android:layout_marginEnd="16dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="تعديل الملف الشحصي"
+                            android:textSize="18sp"
+                            android:textColor="#333333"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_back"
+                            app:tint="#9E9E9E"
+                            android:rotation="180"/>
+                    </LinearLayout>
+
+                    <!-- خط فاصل -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginStart="24dp"/>
+
+                    <!-- تغيير كلمة المرور -->
+                    <LinearLayout
+                        android:id="@+id/changePasswordLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="16dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/padlock"
+                            app:tint="#4A4A4A"
+                            android:layout_marginEnd="16dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="تغيير كلمة المرور"
+                            android:textSize="18sp"
+                            android:textColor="#333333"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_back"
+                            app:tint="#9E9E9E"
+                            android:rotation="180"/>
+                    </LinearLayout>
+
+                    <!-- خط فاصل -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginStart="24dp"/>
+
+                    <!-- الإشعارات -->
+                    <LinearLayout
+                        android:id="@+id/notificationsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="16dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/bell"
+                            app:tint="#4A4A4A"
+                            android:layout_marginEnd="16dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="الإشعارات"
+                            android:textSize="18sp"
+                            android:textColor="#333333"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_back"
+                            app:tint="#9E9E9E"
+                            android:rotation="180"/>
+                    </LinearLayout>
+
+                    <!-- خط فاصل -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginStart="24dp"/>
+
+                    <!-- تواصل معنا -->
+                    <LinearLayout
+                        android:id="@+id/contactUsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="16dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/customer"
+                            app:tint="#4A4A4A"
+                            android:layout_marginEnd="16dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="تواصل معنا"
+                            android:textSize="18sp"
+                            android:textColor="#333333"/>
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_back"
+                            app:tint="#9E9E9E"
+                            android:rotation="180"/>
+                    </LinearLayout>
+
+                    <!-- خط فاصل -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginStart="24dp" />
+
+                    <!-- سياسة الخصوصية -->
+                    <LinearLayout
+                        android:id="@+id/privacyPolicyLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="16dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/secure"
+                            app:tint="#4A4A4A"
+                            android:layout_marginEnd="16dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="سياسة الخصوصية"
+                            android:textSize="18sp"
+                            android:textColor="#333333" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_back"
+                            app:tint="#9E9E9E"
+                            android:rotation="180" />
+                    </LinearLayout>
+
+                    <!-- خط فاصل -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginStart="24dp" />
+
+                    <!-- حذف الحساب -->
+                    <LinearLayout
+                        android:id="@+id/deleteAccountLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="16dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/trash"
+                            app:tint="#4A4A4A"
+                            android:layout_marginEnd="16dp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="حذف الحساب"
+                            android:textSize="18sp"
+                            android:textColor="#333333" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_arrow_back"
+                            app:tint="#9E9E9E"
+                            android:rotation="180" />
+                    </LinearLayout>
+
+                    <!-- خط فاصل -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#EEEEEE"
+                        android:layout_marginStart="24dp"/>
+
+                    <!-- تسجيل خروج -->
+                    <LinearLayout
+                        android:id="@+id/logoutLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="16dp"
+                        android:background="?attr/selectableItemBackground">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/logout"
+                            app:tint="#F44336"
+                            android:layout_marginEnd="16dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="تسجيل خروج"
+                            android:textSize="18sp"
+                            android:textColor="#F44336"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+<!--    </LinearLayout>-->
+</ScrollView>

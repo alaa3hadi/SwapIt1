@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardRequestProductSpecific"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:backgroundTint="#f8f8f8"
+
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    android:clipToPadding="false"
+    android:radius="16dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp">
+
+            <!-- Profile, Time -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layoutDirection="rtl"
+                android:gravity="center_vertical"
+                android:weightSum="1">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="start|center_vertical"
+                    android:layoutDirection="rtl">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/userImage"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="14dp"
+                        android:tint="@color/blackDark"
+                        android:src="@drawable/profile" />
+
+                    <TextView
+                        android:id="@+id/fromUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginVertical="6dp"
+                        android:text="سارة أبو كويك"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#333333" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/requestTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:text="منذ ٣ دقائق"
+                    android:textSize="13sp"
+                    android:gravity="end"
+                    android:textColor="#777777"
+                    android:layout_marginStart="8dp"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+            <!-- صورة + معلومات المنتج بجانبها -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="10dp"
+                android:layoutDirection="rtl"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <FrameLayout
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:background="@drawable/image_border"
+                    android:padding="3dp"
+                    android:clipToOutline="true"
+                    android:layout_marginEnd="10dp">
+
+                    <ImageView
+                        android:id="@+id/productImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/rounded_corners"
+                        android:clipToOutline="true" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/wantProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="لديه : كيلو طحين أبيض و كيلو طحين أسمر"
+                        android:textSize="17sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blackDark"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                        android:layout_marginBottom="8dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layoutDirection="rtl"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/locationIcon"
+                            android:layout_width="14dp"
+                            android:layout_height="14dp"
+                            android:src="@drawable/pin1"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:id="@+id/locationUser"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="غزة_الرمال"
+                            android:textSize="16sp"
+                            android:textColor="#777777" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- أزرار تحت -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="4dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_call"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="تواصل عبر الواتساب"
+                    android:textColor="@color/blackDark"
+                    android:textSize="12.5sp"
+                    android:layout_marginHorizontal="5dp"
+                    android:elevation="4dp"
+                    android:textAllCaps="false"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    app:backgroundTint="@color/white"
+                    app:cornerRadius="20dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/white"
+                    android:maxLines="1"
+                    android:layout_weight="1" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_accept"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="قبول الطلب"
+                    android:textColor="@color/blackDark"
+                    android:textSize="12.5sp"
+                    android:layout_marginHorizontal="5dp"
+                    android:elevation="4dp"
+                    android:textAllCaps="false"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    app:backgroundTint="@color/white"
+                    app:cornerRadius="20dp"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="@color/white"
+                    android:maxLines="1"
+                    android:layout_weight="1" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+</androidx.cardview.widget.CardView>

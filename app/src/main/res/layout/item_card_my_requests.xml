@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/MyCardRequest"
+    android:layout_width="match_parent"
+    android:layout_height="130dp"
+android:layout_margin="20dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="8dp"
+    android:padding="16dp"
+    app:cardBackgroundColor="@color/black"
+    android:outlineSpotShadowColor="@color/black"
+    android:backgroundTint="#f8f8f8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:gravity="center_vertical"
+        android:layoutDirection="rtl">
+
+        <FrameLayout
+            android:layout_width="105dp"
+            android:layout_height="90dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/image_border"
+            android:padding="3dp"
+            android:clipToOutline="true">  <!-- هذه أهم نقطة -->
+
+            <ImageView
+                android:id="@+id/productImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:background="@drawable/rounded_corners"
+                android:clipToOutline="true" />  <!-- فعلياً يطبق القص -->
+        </FrameLayout>
+
+
+
+
+        <!-- النصوص -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layoutDirection="rtl">
+
+            <!-- اسم المنتج -->
+            <TextView
+                android:id="@+id/wantProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="حاسوب محمول"
+                android:textColor="@color/blackDark"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textAlignment="viewStart" />
+
+            <!-- مقابل المنتج -->
+            <TextView
+                android:id="@+id/haveProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="مقابل: هاتف ذكي بإصدار حديث جدًا"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:layout_marginTop="8dp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textAlignment="viewStart" />
+
+            <TextView
+                android:id="@+id/currentState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="قيد الانتظار"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:background="@drawable/rounded_status_background"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:textAlignment="center" />
+
+
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/menuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_more_vert_black_24dp"
+            android:contentDescription="خيارات"
+            app:tint="@color/black" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
