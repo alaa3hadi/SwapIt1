@@ -45,66 +45,50 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_above="@+id/bottomActions"
         android:fillViewport="true"
         android:overScrollMode="never">
 
         <LinearLayout
+            android:id="@+id/photo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="8dp">
 
-            <!-- صورة المنتج مع تأثير ظل محسن -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#E0E0E0"
-                app:strokeWidth="0.5dp">
 
+                <!-- قسم الصور مع ViewPager2 -->
                 <FrameLayout
+                    android:id="@+id/photoContainer"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp">
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp">
 
-                    <!-- الصورة -->
-                    <ImageView
-                        android:id="@+id/productImage"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/flour" />
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-                    <!-- سهم اليسار -->
-                    <ImageView
-                        android:id="@+id/arrowLeft"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_vertical|start"
-                        android:layout_marginStart="8dp"
-                        android:background="@drawable/circle_gray_photo"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_arrow_back"
-                        app:tint="#333333" />
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewPagerImages"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginHorizontal="15dp"
+                            />
 
-                    <!-- سهم اليمين -->
-                    <ImageView
-                        android:id="@+id/arrowRight"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_vertical|end"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/circle_gray_photo"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_arrow_back"
-                        android:rotation="180"
-                        app:tint="#333333"/>
+                        <me.relex.circleindicator.CircleIndicator3
+                            android:id="@+id/indicator"
+                            android:layout_width="wrap_content"
+                            android:layout_height="16dp"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="6dp"
 
+                            app:ci_drawable="@drawable/tab_selector"
+                            app:ci_drawable_unselected="@drawable/tab_unselected"
+                            app:ci_gravity="center" />
+                    </LinearLayout>
                 </FrameLayout>
 
-            </com.google.android.material.card.MaterialCardView>
 
             <!-- تفاصيل المنتج مع تصميم أنيق -->
             <com.google.android.material.card.MaterialCardView

@@ -2,6 +2,7 @@ package com.example.swapit1.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -25,6 +26,8 @@ import com.example.swapit1.edit.edit_request
 import com.example.swapit1.model.Request
 import com.example.swapit1.ui.details.My_Request_Details
 import com.example.swapit1.ui.details.request_details
+import java.io.File
+import java.io.FileOutputStream
 
 
 class RequestAdapter(
@@ -131,7 +134,37 @@ class RequestAdapter(
         }
 
         cardItem.setOnClickListener {
+
+            // تحويل Base64 لكل الصور إلى ملفات مؤقتة
+            val imagePaths = arrayListOf<String>()
+            item.images.forEachIndexed { i, base64 ->
+                try {
+                    val bytes = Base64.decode(base64, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    val tempFile = File(context.cacheDir, "request_${item.requestId }_$i.jpg")
+                    val fos = FileOutputStream(tempFile)
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, fos)
+                    fos.close()
+                    imagePaths.add(tempFile.absolutePath)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }
+
             val intent = Intent(context, My_Request_Details::class.java)
+            intent.putExtra("requestId", item.requestId )
+            intent.putExtra("productName", item.productName)
+            intent.putExtra("ownerName", item.ownerName)
+            intent.putExtra("correspondingProduct", item.correspondingProduct)
+            intent.putExtra("description", item.description)
+            intent.putExtra("location", item.location)
+            intent.putExtra("category", item.category)
+            intent.putExtra("postTimestampMillis", item.createdAt?.toDate()?.time ?: 0L)
+
+            intent.putExtra("ownerId", item.ownerId)
+            intent.putStringArrayListExtra("imagesPaths", imagePaths) // الصور كملفات
+            intent.putExtra("requesterId" , item.requesterId)
+            intent.putExtra("requesterName" , item.requesterName)
             context.startActivity(intent)
         }
 

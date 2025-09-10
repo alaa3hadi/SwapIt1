@@ -53,58 +53,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="3dp">
 
-            <!-- صورة المنتج مع تأثير ظل محسن -->
-            <com.google.android.material.card.MaterialCardView
+            <!-- قسم الصور مع ViewPager2 -->
+            <FrameLayout
+                android:id="@+id/photoContainer"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
-                app:strokeColor="#E0E0E0"
-                app:strokeWidth="0.5dp">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
 
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="250dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-                    <!-- الصورة -->
-                    <ImageView
-                        android:id="@+id/productImage"
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPagerImages"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/flour" />
+                        android:layout_height="250dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginHorizontal="15dp"
+                        />
 
-                    <!-- سهم اليسار -->
-                    <ImageView
-                        android:id="@+id/arrowLeft"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_vertical|start"
-                        android:layout_marginStart="8dp"
-                        android:background="@drawable/circle_gray_photo"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_arrow_back"
-                        app:tint="#333333" />
+                    <me.relex.circleindicator.CircleIndicator3
+                        android:id="@+id/indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="6dp"
 
-                    <!-- سهم اليمين -->
-                    <ImageView
-                        android:id="@+id/arrowRight"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="center_vertical|end"
-                        android:layout_marginEnd="8dp"
-                        android:background="@drawable/circle_gray_photo"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_arrow_back"
-                        android:rotation="180"
-                        app:tint="#333333"/>
-
-                </FrameLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+                        app:ci_drawable="@drawable/tab_selector"
+                        app:ci_drawable_unselected="@drawable/tab_unselected"
+                        app:ci_gravity="center" />
+                </LinearLayout>
+            </FrameLayout>
 
             <!-- تفاصيل المنتج مع تصميم أنيق -->
             <com.google.android.material.card.MaterialCardView
