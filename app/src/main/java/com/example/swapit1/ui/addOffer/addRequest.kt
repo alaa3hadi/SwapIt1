@@ -212,40 +212,43 @@ class addRequest : AppCompatActivity() {
         val requestsCollection = firestore.collection("requests")
         val newDocRef = requestsCollection.document()
         val reqId = newDocRef.id
+        firestore.collection("users").document(requesterId)
+            .addSnapshotListener { doc, _ ->
+                if (binding == null) return@addSnapshotListener
+                val name = (doc?.getString("name") ?: "مستخدم").ifBlank { "مستخدم" }
+                val request = Request(
 
+                    ownerId = ownerId ?: "",
+                    ownerName = ownerName ?: "",
+                    requesterId = requesterId ?: "user123",
+                    requesterName = name,
+                    productId = offerId ?: "",
+                    productName = productName,
+                    correspondingProduct = correspondingProduct,
+                    category = category,
+                    location = location,
+                    description = description,
+                    images = images,
+                    createdAt = Timestamp.now(),
+                    requestId = reqId,
+                    state = RequestState.PENDING
+                )
 
+                requestsCollection.add(request)
+                    .addOnSuccessListener {
 
+                        Log.d("AddRequest", "ownerId=$ownerId, requesterId=$requesterId, productId=$offerId")
 
-        val request = Request(
+                        hideLoadingDialog()
+                        showSuccessDialog()
+                    }
+                    .addOnFailureListener { e ->
+                        hideLoadingDialog()
+                        Toast.makeText(this, "فشل نشر الطلب: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
 
-            ownerId = ownerId ?: "",
-            ownerName = ownerName ?: "",
-            requesterId = requesterId ?: "user123",
-            requesterName = requesterName,
-            productId = offerId ?: "",
-            productName = productName,
-            correspondingProduct = correspondingProduct,
-            category = category,
-            location = location,
-            description = description,
-            images = images,
-            createdAt = Timestamp.now(),
-            requestId = reqId,
-            state = RequestState.PENDING
-        )
-
-        requestsCollection.add(request)
-            .addOnSuccessListener {
-
-                Log.d("AddRequest", "ownerId=$ownerId, requesterId=$requesterId, productId=$offerId")
-
-                hideLoadingDialog()
-                showSuccessDialog()
             }
-            .addOnFailureListener { e ->
-                hideLoadingDialog()
-                Toast.makeText(this, "فشل نشر الطلب: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+
     }
 
     private fun showSuccessDialog() {

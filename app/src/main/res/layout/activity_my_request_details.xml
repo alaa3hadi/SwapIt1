@@ -334,14 +334,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="قيد الانتظار"
+                            android:textColor="@color/grey"
                             android:textSize="14sp"
+                            android:layout_marginTop="8dp"
                             android:maxLines="1"
                             android:ellipsize="end"
                             android:background="@drawable/rounded_status_background"
                             android:paddingHorizontal="12dp"
                             android:paddingVertical="4dp"
                             android:textAlignment="center" />
-
 
 
 

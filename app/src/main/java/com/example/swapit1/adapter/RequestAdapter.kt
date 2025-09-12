@@ -159,6 +159,10 @@ class RequestAdapter(
             intent.putExtra("description", item.description)
             intent.putExtra("location", item.location)
             intent.putExtra("category", item.category)
+            intent.putExtra("State", item.state)
+            intent.putExtra("productId", item.productId)
+
+
             intent.putExtra("postTimestampMillis", item.createdAt?.toDate()?.time ?: 0L)
 
             intent.putExtra("ownerId", item.ownerId)

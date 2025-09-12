@@ -1,6 +1,7 @@
 package com.example.swapit1.ui.details
 
 import android.graphics.BitmapFactory
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,7 @@ import com.example.swapit1.R
 import com.example.swapit1.adapter.SelectedImagesPagerAdapter
 import com.example.swapit1.databinding.ActivityMyRequestDetailsBinding
 import com.example.swapit1.databinding.FragmentHomeBinding
+import com.example.swapit1.model.RequestState
 import com.example.swapit1.model.requestItem
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -42,6 +44,8 @@ class My_Request_Details : AppCompatActivity() {
         val requestId = intent.getStringExtra("requestId")
         val requesterId = intent.getStringExtra("requesterId")
         val requesterName = intent.getStringExtra("requesterName")
+        val state = intent.getSerializableExtra("State") as RequestState
+
         val imagesPaths = intent.getStringArrayListExtra("imagesPaths") ?: arrayListOf<String>()
 
         // تعيين النصوص
@@ -49,6 +53,29 @@ class My_Request_Details : AppCompatActivity() {
         binding.productDescription.text = description
         binding.productLocation.text = location
         binding.productCategory.text = category
+       val currState =  binding.currentState
+
+
+        val statusBackground = currState.background as GradientDrawable
+
+        when (state) {
+            RequestState.PENDING -> {
+                currState.text = "قيد الانتظار"
+                currState.setTextColor(this.getColor(R.color.blue))
+                statusBackground.setStroke(2, this.getColor(R.color.blue))  // تغيير لون الحدود
+            }
+            RequestState.ACCEPTED -> {
+                currState.text = "تم القبول"
+                currState.setTextColor(this.getColor(R.color.green))
+                statusBackground.setStroke(2, this.getColor(R.color.green))
+            }
+            RequestState.REJECTED -> {
+                currState.text = "تم الرفض"
+                currState.setTextColor(this.getColor(R.color.red))
+                statusBackground.setStroke(2, this.getColor(R.color.red))
+            }
+        }
+
 
         db.collection("users").document(ownerId)
             .addSnapshotListener { doc, _ ->

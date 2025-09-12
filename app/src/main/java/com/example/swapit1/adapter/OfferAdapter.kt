@@ -17,6 +17,7 @@ import com.example.swapit1.model.Offers
 import com.example.swapit1.ui.SpecificProductRequests
 import com.example.swapit1.ui.details.offer_details
 import com.example.swapit1.edit.edit_offer
+import com.example.swapit1.model.Request
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
 import java.io.FileOutputStream
@@ -25,6 +26,7 @@ class OfferAdapter(
     private val context: Context,
     private val items: List<Offers>
 ) : ArrayAdapter<Offers>(context, 0, items) {
+    private val firestore = FirebaseFirestore.getInstance()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val binding: ItemCardMyOffersBinding
@@ -107,6 +109,7 @@ class OfferAdapter(
                                     .document(docId)
                                     .delete()
                                     .addOnSuccessListener {
+                                        deleteAllReqForOffer(docId)
                                         Toast.makeText(context, "تم حذف العرض: ${item.productName}", Toast.LENGTH_SHORT).show()
                                     }
                                     .addOnFailureListener { e ->
@@ -176,4 +179,27 @@ class OfferAdapter(
 
         return itemView
     }
+
+    private fun deleteAllReqForOffer(offerId: String) {
+        firestore.collection("requests")
+            .whereEqualTo("offerId", offerId) // جيب كل الطلبات المرتبطة بالعرض
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val batch = firestore.batch()
+                for (doc in querySnapshot.documents) {
+                    batch.delete(doc.reference) // احذف كل طلب
+                }
+                batch.commit()
+                    .addOnSuccessListener {
+                        Toast.makeText(context, "تم حذف جميع الطلبات المرتبطة بالعرض", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(context, "خطأ عند حذف الطلبات: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(context, "فشل جلب الطلبات: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
 }

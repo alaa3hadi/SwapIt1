@@ -247,29 +247,36 @@ class addOfferFragment : Fragment() {
         val offersCollection = firestore.collection("offers")
         val newDocRef = offersCollection.document()
         val offerId = newDocRef.id
-
-        val offer = Offers(
-            offerId = offerId,
-            ownerId = currentUser?.uid ?: "user123",
-            ownerName = currentUser?.displayName ?: "Sara Abu Kwaik",
-            productName = productName,
-            requestedProduct = requestedProduct,
-            category = category,
-            location = location,
-            description = description,
-            images = images,
-            createdAt = com.google.firebase.Timestamp.now()
-        )
-
-        newDocRef.set(offer)
-            .addOnSuccessListener {
-                hideLoadingDialog()
-                showSuccessDialog()
+        firestore.collection("users").document(currentUser?.uid ?: "user123")
+            .addSnapshotListener { doc, _ ->
+                if (_binding == null) return@addSnapshotListener
+                val name = (doc?.getString("name") ?: "مستخدم").ifBlank { "مستخدم" }
+                val offer = Offers(
+                    offerId = offerId,
+                    ownerId = currentUser?.uid ?: "user123",
+                    ownerName = name ?: "Sara Abu Kwaik",
+                    productName = productName,
+                    requestedProduct = requestedProduct,
+                    category = category,
+                    location = location,
+                    description = description,
+                    images = images,
+                    createdAt = com.google.firebase.Timestamp.now()
+                )
+                newDocRef.set(offer)
+                    .addOnSuccessListener {
+                        hideLoadingDialog()
+                        showSuccessDialog()
+                    }
+                    .addOnFailureListener { e ->
+                        hideLoadingDialog()
+                        Toast.makeText(requireContext(), "فشل نشر العرض: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
             }
-            .addOnFailureListener { e ->
-                hideLoadingDialog()
-                Toast.makeText(requireContext(), "فشل نشر العرض: ${e.message}", Toast.LENGTH_SHORT).show()
-            }
+
+
+
+
     }
 
 

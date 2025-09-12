@@ -32,6 +32,7 @@ import com.example.swapit1.model.requestsProductItem
 import com.example.swapit1.ui.SpecificProductRequests
 import com.example.swapit1.ui.details.request_details
 import com.google.android.material.button.MaterialButton
+import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
 import java.io.FileOutputStream
 
@@ -39,8 +40,9 @@ class RequestsProductAdapter (
     private val context: Context,
     private val items: List<Request>
 ) : ArrayAdapter<Request>(context, 0, items) {
-
+    private val firestore = FirebaseFirestore.getInstance()
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+
         val itemView = convertView ?: LayoutInflater.from(context)
             .inflate(R.layout.item_card_requests_product_specific, parent, false)
 
@@ -52,6 +54,8 @@ class RequestsProductAdapter (
         val wantProduct = itemView.findViewById<TextView>(R.id.wantProduct)
         val location = itemView.findViewById<TextView>(R.id.locationUser)
         val cardItem = itemView.findViewById<CardView>(R.id.cardRequestProductSpecific)
+        val buttonCall = itemView.findViewById<Button>(R.id.button_call)
+
 
 
 
@@ -118,6 +122,7 @@ class RequestsProductAdapter (
                 Handler(Looper.getMainLooper()).postDelayed({
                     if (successDialog.isShowing) {
                         successDialog.dismiss()
+                        //إشعار عند مرسل الطلب بقبول طلبه
 
 
                     }
@@ -160,13 +165,38 @@ class RequestsProductAdapter (
             intent.putExtra("location", item.location)
             intent.putExtra("category", item.category)
             intent.putExtra("postTimestampMillis", item.createdAt?.toDate()?.time ?: 0L)
-
+            intent.putExtra("productId", item.productId)
             intent.putExtra("ownerId", item.ownerId)
             intent.putStringArrayListExtra("imagesPaths", imagePaths) // الصور كملفات
             intent.putExtra("requesterId" , item.requesterId)
             intent.putExtra("requesterName" , item.requesterName)
+            intent.putExtra("State" , item.state)
+
             context.startActivity(intent)
         }
+        buttonCall.setOnClickListener {
+            firestore.collection("users").document(item.ownerId)
+                .addSnapshotListener { doc, _ ->
+                    val phone = (doc?.getString("phone") ?: "1234").ifBlank { "1234" }
+                    if (!phone.isNullOrEmpty()) {
+                        try {
+                            val url = "https://wa.me/$phone"  // صيغة الواتساب الرسمية
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.setPackage("com.whatsapp") // يفتح الواتس فقط
+                            intent.data = android.net.Uri.parse(url)
+                            context.startActivity(intent)
+                        } catch (e: Exception) {
+                            Toast.makeText(context, "الواتساب غير مثبت على هذا الجهاز", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(context, "رقم الهاتف غير متوفر", Toast.LENGTH_SHORT).show()
+                    }
+
+
+                }
+
+        }
+
 
 
         return itemView

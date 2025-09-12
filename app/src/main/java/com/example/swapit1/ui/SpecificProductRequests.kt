@@ -18,6 +18,7 @@ import androidx.navigation.findNavController
 import com.example.swapit1.R
 import com.example.swapit1.adapter.RequestsProductAdapter
 import com.example.swapit1.model.Request
+import com.example.swapit1.model.RequestState
 import com.example.swapit1.model.requestsProductItem
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.firestore.FirebaseFirestore
@@ -107,17 +108,29 @@ class SpecificProductRequests : AppCompatActivity() {
     }
 
     private fun loadRequestsForOffer(offerId: String) {
+        val emptyView = findViewById<View>(R.id.emptyLayout)
+
         firestore.collection("requests")
-            .whereEqualTo("productId", offerId)   // كل الطلبات لهذا العرض
+            .whereEqualTo("productId", offerId)
             .get()
             .addOnSuccessListener { result ->
                 val requests = result.toObjects(Request::class.java)
-                // اربطهم مع RecyclerView/Adapter
-                val adapter = RequestsProductAdapter(this, requests)
-                listView.adapter = adapter
+                    .filter { it.state != RequestState.REJECTED }
+
+                if (requests.isEmpty()) {
+                    listView.visibility = View.GONE
+                    emptyView.visibility = View.VISIBLE
+                } else {
+                    listView.visibility = View.VISIBLE
+                    emptyView.visibility = View.GONE
+
+                    val adapter = RequestsProductAdapter(this, requests)
+                    listView.adapter = adapter
+                }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "فشل تحميل الطلبات: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
+
 }
