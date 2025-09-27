@@ -4,43 +4,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
-
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:visibility="gone"
+        android:indeterminate="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <!-- التول بار -->
+
+    <!-- المحتوى -->
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/myToolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- العنوان بالنص -->
         <TextView
             android:id="@+id/customToolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:text="الإشعارات"
-            android:textStyle="bold"
             android:textColor="@color/blackDark"
             android:textSize="20sp"
-            android:layout_gravity="center" />
+            android:textStyle="bold" />
 
         <!-- زر الرجوع -->
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_arrow_back"
+
+            android:layout_gravity="start|center_vertical"
+            android:background="@android:color/transparent"
             android:contentDescription="رجوع"
             android:scaleType="centerInside"
-            android:background="@android:color/transparent"
-            android:layout_gravity="start|center_vertical"
+            android:src="@drawable/ic_arrow_back"
 
+            android:visibility="visible" />
+        <!-- زر مسح الكل -->
+        <ImageButton
+            android:id="@+id/clearAllButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_gravity="end|center_vertical"
+            android:background="@android:color/transparent"
+            android:contentDescription="مسح الكل"
+            android:scaleType="centerInside"
+            android:src="@drawable/delete"
             android:visibility="visible" />
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- المحتوى -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_notifications"
         android:layout_width="0dp"
@@ -50,5 +76,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
-
+    <TextView
+        android:id="@+id/emptyView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="لا توجد إشعارات"
+        android:textSize="16sp"
+        android:textColor="@color/blackDark"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/myToolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

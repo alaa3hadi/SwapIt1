@@ -46,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text=" تفاصيل العرض "
+                    android:text=" تفاصيل عرضي "
                     android:textColor="#000000"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -286,7 +286,113 @@
                         android:background="#EEEEEE" />
 
                     <!-- معلومات المالك -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="#FFFFFF"
+                    app:strokeColor="#FFFFFF"
+                    app:strokeWidth="0.5dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:text="معلوماتي "
+                        android:textColor="#333333"
+                        android:textSize="16sp"
+                        android:textStyle="bold"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- صورة الملف الشخصي مع ظل محسن -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            app:cardCornerRadius="30dp"
+                            app:strokeColor="#FFFFFF"
+                            app:strokeWidth="0.5dp">
+
+                            <ImageView
+                                android:id="@+id/userImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/user_icon"
+                                android:contentDescription="صورة المستخدم"/>
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:id="@+id/userName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="أحمد محمد"
+                                android:textColor="#333333"
+                                android:textSize="16sp"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/userPhone"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="+970 59 123 4567"
+                                android:textColor="#757575"
+                                android:textSize="14sp"/>
+                        </LinearLayout>
+
+                        <!-- أيقونات التواصل مع تصميم محسن -->
+                        <LinearLayout
+                            android:layout_width="82dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <ImageButton
+                                android:id="@+id/btnMessage"
+                                android:layout_width="40dp"
+                                android:layout_height="36dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="مراسلة"
+                                android:padding="8dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/chat"
+                                />
+
+                            <ImageButton
+                                android:id="@+id/btnCall"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="?attr/selectableItemBackgroundBorderless"
+                                android:contentDescription="اتصال"
+                                android:padding="8dp"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/telephone"
+                                />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                     <!-- وصف المنتج -->
                     <TextView
@@ -327,7 +433,7 @@
         app:cardElevation="4dp">
 
         <Button
-            android:id="@+id/btn_exchange"
+            android:id="@+id/btn_displayReq"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@drawable/gradient_button"

@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     android:id="@+id/main"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:layoutDirection="rtl">
@@ -13,31 +12,28 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#FFFFFF"
-        android:layoutDirection="rtl"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp">
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:elevation="2dp">
 
         <ImageButton
             android:id="@+id/backButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/ic_arrow_back"
             android:contentDescription="رجوع"
-            android:scaleType="centerInside"
             android:background="@android:color/transparent"
             android:layout_gravity="start|center_vertical"
-
-            android:visibility="visible" />
+            android:scaleType="centerInside" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text= "تفاصيل طلبي"
-            android:textColor="#000000"
+            android:text="تفاصيل طلبي"
+            android:textColor="#222222"
             android:textSize="20sp"
             android:textStyle="bold" />
-
     </androidx.appcompat.widget.Toolbar>
 
     <!-- المحتوى الرئيسي -->
@@ -53,52 +49,47 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:padding="12dp">
 
+            <!-- قسم الصور مع ViewPager2 -->
+            <FrameLayout
+                android:id="@+id/photoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
 
-                <!-- قسم الصور مع ViewPager2 -->
-                <FrameLayout
-                    android:id="@+id/photoContainer"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp">
+                    android:orientation="vertical">
 
-                    <LinearLayout
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/viewPagerImages"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_height="260dp"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_marginBottom="8dp"/>
 
-                        <androidx.viewpager2.widget.ViewPager2
-                            android:id="@+id/viewPagerImages"
-                            android:layout_width="match_parent"
-                            android:layout_height="250dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_marginHorizontal="15dp"
-                            />
+                    <me.relex.circleindicator.CircleIndicator3
+                        android:id="@+id/indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="16dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="6dp"
+                        app:ci_drawable="@drawable/tab_selector"
+                        app:ci_drawable_unselected="@drawable/tab_unselected"
+                        app:ci_gravity="center" />
+                </LinearLayout>
+            </FrameLayout>
 
-                        <me.relex.circleindicator.CircleIndicator3
-                            android:id="@+id/indicator"
-                            android:layout_width="wrap_content"
-                            android:layout_height="16dp"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="6dp"
-
-                            app:ci_drawable="@drawable/tab_selector"
-                            app:ci_drawable_unselected="@drawable/tab_unselected"
-                            app:ci_gravity="center" />
-                    </LinearLayout>
-                </FrameLayout>
-
-
-            <!-- تفاصيل المنتج مع تصميم أنيق -->
+            <!-- تفاصيل المنتج -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="12dp"
-                android:backgroundTint="#FFFFFF"
-                app:strokeColor="#FFFFFF"
-                app:strokeWidth="0.5dp">
+                app:cardCornerRadius="14dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="#FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -106,18 +97,16 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- اسم المنتج مع مسافة محسنة -->
                     <TextView
                         android:id="@+id/productName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
                         android:text="كيس سكر 5 كجم"
-                        android:textColor="#333333"
+                        android:textColor="#222222"
                         android:textSize="20sp"
                         android:textStyle="bold"/>
 
-                    <!-- القسم والموقع في صف واحد -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -125,7 +114,6 @@
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <!-- القسم مع أيقونة -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -138,18 +126,17 @@
                                 android:layout_height="16dp"
                                 android:layout_marginEnd="8dp"
                                 android:src="@drawable/menu"
-                                app:tint="#616161" />
+                                app:tint="#757575" />
 
                             <TextView
                                 android:id="@+id/productCategory"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="مواد غذائية"
-                                android:textColor="#616161"
+                                android:textColor="#757575"
                                 android:textSize="14sp"/>
                         </LinearLayout>
 
-                        <!-- الموقع مع أيقونة -->
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -162,31 +149,30 @@
                                 android:layout_height="16dp"
                                 android:layout_marginEnd="8dp"
                                 android:src="@drawable/placeholder"
-                                app:tint="#616161"/>
+                                app:tint="#757575"/>
 
                             <TextView
                                 android:id="@+id/productLocation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="غزة - حي الشجاعية"
-                                android:textColor="#616161"
+                                android:textColor="#757575"
                                 android:textSize="14sp"/>
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- وصف المنتج مع فواصل واضحة -->
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginBottom="12dp"
-                        android:background="#EEEEEE"/>
+                        android:background="#E0E0E0"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
                         android:text="وصف المنتج"
-                        android:textColor="#333333"
+                        android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold"/>
 
@@ -201,15 +187,14 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- معلومات الطالب مع تصميم أنيق -->
+            <!-- معلومات الطالب -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                android:backgroundTint="#FFFFFF"
-                app:strokeColor="#FFFFFF"
-                app:strokeWidth="0.5dp">
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="4dp"
+                android:backgroundTint="#FFFFFF">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -221,8 +206,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
-                        android:text="معلومات العارض"
-                        android:textColor="#333333"
+                        android:text="معلوماتي"
+                        android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold"/>
 
@@ -232,20 +217,20 @@
                         android:orientation="horizontal"
                         android:layout_marginBottom="16dp">
 
-                        <!-- صورة الملف الشخصي مع ظل محسن -->
                         <com.google.android.material.card.MaterialCardView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             app:cardCornerRadius="30dp"
                             app:strokeColor="#FFFFFF"
-                            app:strokeWidth="0.5dp">
+                            app:strokeWidth="0.5dp"
+                            app:cardElevation="2dp">
 
                             <ImageView
                                 android:id="@+id/userImage"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/p"
+                                android:src="@drawable/user_icon"
                                 android:contentDescription="صورة المستخدم"/>
                         </com.google.android.material.card.MaterialCardView>
 
@@ -262,7 +247,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="أحمد محمد"
-                                android:textColor="#333333"
+                                android:textColor="#222222"
                                 android:textSize="16sp"
                                 android:textStyle="bold"/>
 
@@ -276,12 +261,12 @@
                                 android:textSize="14sp"/>
                         </LinearLayout>
 
-                        <!-- أيقونات التواصل مع تصميم محسن -->
                         <LinearLayout
                             android:layout_width="82dp"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
+
                             <ImageButton
                                 android:id="@+id/btnMessage"
                                 android:layout_width="40dp"
@@ -290,8 +275,7 @@
                                 android:contentDescription="مراسلة"
                                 android:padding="8dp"
                                 android:scaleType="centerInside"
-                                android:src="@drawable/chat"
-                                app:tint="#616161"/>
+                                android:src="@drawable/chat"/>
 
                             <ImageButton
                                 android:id="@+id/btnCall"
@@ -301,53 +285,30 @@
                                 android:contentDescription="اتصال"
                                 android:padding="8dp"
                                 android:scaleType="centerInside"
-                                android:src="@drawable/telephone"
-                                app:tint="#616161"/>
-
-
+                                android:src="@drawable/telephone"/>
                         </LinearLayout>
                     </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="16dp"
                         android:text="الحالة"
-                        android:textColor="#333333"
+                        android:textColor="#222222"
                         android:textSize="16sp"
                         android:textStyle="bold"/>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/currentState"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
-
-
-                        <TextView
-                            android:id="@+id/currentState"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="قيد الانتظار"
-                            android:textColor="@color/grey"
-                            android:textSize="14sp"
-                            android:layout_marginTop="8dp"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:background="@drawable/rounded_status_background"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="4dp"
-                            android:textAlignment="center" />
-
-
-
-                    </LinearLayout>
-                </LinearLayout>
+                        android:text="قيد الانتظار"
+                        android:textColor="@color/grey"
+                        android:textSize="14sp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/rounded_status_background"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

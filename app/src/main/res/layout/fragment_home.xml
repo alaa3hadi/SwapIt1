@@ -56,18 +56,33 @@
             </LinearLayout>
 
             <!-- أيقونة الإشعارات -->
-            <ImageView
-                android:id="@+id/notificationIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/notification"
-                android:contentDescription="إشعارات"
-                app:tint="@color/blackDark"
-                android:layout_marginEnd="16dp"
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="16dp">
 
+                <ImageView
+                    android:id="@+id/notificationIcon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/notification"
+                    android:contentDescription="إشعارات"
+                    app:tint="@color/blackDark"/>
+
+                <TextView
+                    android:id="@+id/notificationBadge"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="end|top"
+                    android:background="@drawable/badge_background"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:visibility="gone"/>
+            </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.MaterialToolbar>
 

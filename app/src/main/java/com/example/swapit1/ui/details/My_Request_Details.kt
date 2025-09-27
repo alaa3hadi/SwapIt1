@@ -1,8 +1,11 @@
 package com.example.swapit1.ui.details
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.graphics.drawable.GradientDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -108,11 +111,51 @@ class My_Request_Details : AppCompatActivity() {
         val indicator: CircleIndicator3 = binding.indicator
         indicator.setViewPager(binding.viewPagerImages)
 
+        loadOwnerData(requesterId)
+
 
         setContentView(binding.root)
 
 
 
+    }
+    private fun loadOwnerData(ownerId: String?) {
+        db.collection("users").document(ownerId.toString())
+            .get()
+            .addOnSuccessListener { doc ->
+                if (doc.exists()) {
+                    val ownerName = doc.getString("name") ?: "غير معروف"
+                    val ownerPhone = doc.getString("phone") ?: "غير متوفر"
+                    val photoBase64 = doc.getString("photoBase64")
+
+                    binding.userName.text = ownerName
+                    binding.userPhone.text = ownerPhone
+
+                    if (!photoBase64.isNullOrEmpty()) {
+                        val bytes = android.util.Base64.decode(photoBase64, android.util.Base64.DEFAULT)
+                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                        binding.userImage.setImageBitmap(bitmap)
+                    } else {
+                        binding.userImage.setImageResource(R.drawable.user_icon)
+                    }
+
+                    // أزرار الاتصال والمراسلة
+                    binding.btnCall.setOnClickListener {
+                        val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$ownerPhone"))
+                        startActivity(callIntent)
+                    }
+                    binding.btnMessage.setOnClickListener {
+                        val smsIntent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:$ownerPhone"))
+                        startActivity(smsIntent)
+                    }
+
+                } else {
+                    Toast.makeText(this, "بيانات المالك غير متوفرة", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "فشل تحميل بيانات المالك", Toast.LENGTH_SHORT).show()
+            }
     }
 
 }

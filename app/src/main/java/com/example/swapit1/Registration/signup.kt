@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.example.swapit1.MainActivity
+import com.example.swapit1.Registration.LoginActivity
 import com.example.swapit1.auth.AuthAlias
 import com.example.swapit1.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -15,6 +16,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 
+@Suppress("DEPRECATION")
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding

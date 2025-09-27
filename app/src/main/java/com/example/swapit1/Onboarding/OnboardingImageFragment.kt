@@ -11,6 +11,7 @@ import com.example.swapit1.databinding.FragmentOnboardingScreenBinding
 import androidx.core.content.edit
 import com.example.swapit1.Registration.LoginActivity
 
+
 class OnboardingImageFragment(private val pageIndex: Int) : Fragment() {
 
     private var _binding: FragmentOnboardingScreenBinding? = null

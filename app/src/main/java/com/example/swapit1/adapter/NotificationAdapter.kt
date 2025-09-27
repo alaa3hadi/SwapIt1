@@ -1,10 +1,9 @@
 package com.example.swapit1.adapter
 
-import android.content.Context
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -16,8 +15,8 @@ class NotificationAdapter(private val notifications: List<Notification>) :
 
     inner class NotificationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textNotification: TextView = itemView.findViewById(R.id.notification_text)
-        val iconRes : ImageView = itemView.findViewById(R.id.notification_icon)
-        val time : TextView = itemView.findViewById(R.id.notification_time)
+        val iconRes: ImageView = itemView.findViewById(R.id.notification_icon)
+        val time: TextView = itemView.findViewById(R.id.notification_time)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
@@ -27,10 +26,16 @@ class NotificationAdapter(private val notifications: List<Notification>) :
     }
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
+
         val item = notifications[position]
         holder.iconRes.setImageResource(item.iconRes)
-        holder.textNotification.text = item.message
+        holder.textNotification.text = "${item.title}\n${item.message}"
         holder.time.text = item.timeText
+
+        // لون الخلفية للإشعارات الجديدة
+        holder.itemView.setBackgroundColor(
+            if (item.seen) Color.WHITE else Color.parseColor("#FFF9C4")
+        )
 
         if (position == notifications.size - 1) {
             holder.itemView.findViewById<View>(R.id.divider).visibility = View.GONE
@@ -41,4 +46,3 @@ class NotificationAdapter(private val notifications: List<Notification>) :
 
     override fun getItemCount(): Int = notifications.size
 }
-

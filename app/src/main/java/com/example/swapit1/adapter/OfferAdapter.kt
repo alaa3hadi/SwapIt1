@@ -78,6 +78,7 @@ class OfferAdapter(
                     R.id.menu_edit -> {
                         val intent = Intent(context, edit_offer::class.java)
                         intent.putExtra("offerId", item.offerId)
+
                         intent.putExtra("productName", item.productName)
                         intent.putExtra("requestedProduct", item.requestedProduct)
                         intent.putExtra("description", item.description)

@@ -1,3 +1,4 @@
+
 package com.example.swapit1.Registration
 
 import android.content.Intent
@@ -7,6 +8,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
 import com.example.swapit1.MainActivity
+import com.example.swapit1.NotificationHelper
+import com.example.swapit1.R
+import com.example.swapit1.Registration.SignUpActivity
 import com.example.swapit1.auth.AuthAlias
 import com.example.swapit1.databinding.ActivityLoginBinding
 import com.google.firebase.auth.*
@@ -140,6 +144,18 @@ class LoginActivity : AppCompatActivity() {
                 if (!uid.isNullOrEmpty()) {
                     saveUserId(uid)
                 }
+                // ➤ إشعار على واجهة التطبيق وFirestore مع type = "login"
+                addLoginNotification(uid ?: return@addOnSuccessListener)
+
+                // ➤ إشعار نظامي على الجوال
+                NotificationHelper.showNotification(
+                    this,
+                    "تم تسجيل الدخول بنجاح، مرحبًا بك من جديد!",
+                    "",
+                    System.currentTimeMillis().toInt(),
+                    R.drawable.swapit
+                )
+
                 goHome()
             }
             .addOnFailureListener { ex ->
@@ -180,6 +196,22 @@ class LoginActivity : AppCompatActivity() {
             .edit()
             .putString(KEY_USER_ID, uid)
             .apply()
+    }
+
+
+    // داله الاشعارات
+    private fun addLoginNotification(userId: String) {
+        val notifData = hashMapOf(
+            "userId" to userId,
+            "title" to "تم تسجيل الدخول بنجاح، مرحبًا بك من جديد!",
+            "message" to "",
+            "type" to "login",           // ➤ النوع لتحديد أيقونة واجهة التطبيق
+            "createdAt" to com.google.firebase.Timestamp.now(),
+            "seen" to false
+        )
+        db.collection("notifications").add(notifData)
+            .addOnSuccessListener { Log.d("LOGIN", "Login notification added: ${it.id}") }
+            .addOnFailureListener { e -> Log.e("LOGIN", "Failed to add login notification", e) }
     }
 
     private fun goHome() {

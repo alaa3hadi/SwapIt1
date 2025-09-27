@@ -232,8 +232,8 @@
 
                         <!-- صورة الملف الشخصي مع ظل محسن -->
                         <com.google.android.material.card.MaterialCardView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
                             app:cardCornerRadius="30dp"
                             app:strokeColor="#FFFFFF"
                             app:strokeWidth="0.5dp">
@@ -243,7 +243,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@drawable/p"
+                                android:src="@drawable/user_icon"
                                 android:contentDescription="صورة المستخدم"/>
                         </com.google.android.material.card.MaterialCardView>
 
@@ -289,7 +289,7 @@
                                 android:padding="8dp"
                                 android:scaleType="centerInside"
                                 android:src="@drawable/chat"
-                                app:tint="#616161"/>
+                                />
 
                             <ImageButton
                                 android:id="@+id/btnCall"
@@ -300,7 +300,7 @@
                                 android:padding="8dp"
                                 android:scaleType="centerInside"
                                 android:src="@drawable/telephone"
-                                app:tint="#616161"/>
+                               />
 
 
                         </LinearLayout>

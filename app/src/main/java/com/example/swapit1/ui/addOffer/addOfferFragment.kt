@@ -6,16 +6,14 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Base64
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.view.*
+import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import com.example.swapit1.adapter.SelectedImagesPagerAdapter
 import com.example.swapit1.databinding.FragmentAddOfferBinding
 import com.example.swapit1.model.Offers
+import com.example.swapit1.model.Notification
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,12 +21,13 @@ import java.io.ByteArrayOutputStream
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import androidx.navigation.fragment.findNavController
 import com.example.swapit1.R
-import android.widget.TextView
 import android.graphics.Color
 import androidx.appcompat.app.AlertDialog
 import android.widget.LinearLayout
 import android.view.Gravity
 import android.widget.ProgressBar
+import com.example.swapit1.MainActivity
+import com.example.swapit1.NotificationHelper
 
 class addOfferFragment : Fragment() {
 
@@ -96,12 +95,8 @@ class addOfferFragment : Fragment() {
     }
 
     private fun setupErrorListeners() {
-        binding.productNameEditText.addTextChangedListener {
-            binding.productNameError.visibility = View.GONE
-        }
-        binding.requestedProductEditText.addTextChangedListener {
-            binding.requestedProductError.visibility = View.GONE
-        }
+        binding.productNameEditText.addTextChangedListener { binding.productNameError.visibility = View.GONE }
+        binding.requestedProductEditText.addTextChangedListener { binding.requestedProductError.visibility = View.GONE }
         binding.categorySpinner.setOnItemClickListener { _, _, _, _ ->
             binding.categoryError.visibility = View.GONE
             binding.categorySpinner.setTextColor(Color.BLACK)
@@ -110,9 +105,7 @@ class addOfferFragment : Fragment() {
             binding.locationError.visibility = View.GONE
             binding.locationSpinner.setTextColor(Color.BLACK)
         }
-        binding.descriptionEditText.addTextChangedListener {
-            binding.descriptionError.visibility = View.GONE
-        }
+        binding.descriptionEditText.addTextChangedListener { binding.descriptionError.visibility = View.GONE }
     }
 
     private fun openImagePicker() {
@@ -164,59 +157,20 @@ class addOfferFragment : Fragment() {
         val description = binding.descriptionEditText.text.toString().trim()
 
         var isValid = true
-
-        if (selectedImages.isEmpty()) {
-            binding.imageError.text = "يرجى إضافة صورة واحدة على الأقل"
-            binding.imageError.visibility = View.VISIBLE
-            isValid = false
-        }
-
-        if (productName.isEmpty()) {
-            binding.productNameError.text = "يرجى إدخال اسم المنتج"
-            binding.productNameError.visibility = View.VISIBLE
-            isValid = false
-        }
-
-        if (requestedProduct.isEmpty()) {
-            binding.requestedProductError.text = "يرجى إدخال اسم المنتج المطلوب"
-            binding.requestedProductError.visibility = View.VISIBLE
-            isValid = false
-        }
-
-        if (category == "-اختر-") {
-            binding.categoryError.text = "يرجى اختيار القسم"
-            binding.categoryError.visibility = View.VISIBLE
-            isValid = false
-        }
-
-        if (location == "-اختر-") {
-            binding.locationError.text = "يرجى اختيار الموقع"
-            binding.locationError.visibility = View.VISIBLE
-            isValid = false
-        }
-
-        if (description.isEmpty()) {
-            binding.descriptionError.text = "يرجى إدخال الوصف"
-            binding.descriptionError.visibility = View.VISIBLE
-            isValid = false
-        }
-
+        if (selectedImages.isEmpty()) { binding.imageError.text = "يرجى إضافة صورة واحدة على الأقل"; binding.imageError.visibility = View.VISIBLE; isValid = false }
+        if (productName.isEmpty()) { binding.productNameError.text = "يرجى إدخال اسم المنتج"; binding.productNameError.visibility = View.VISIBLE; isValid = false }
+        if (requestedProduct.isEmpty()) { binding.requestedProductError.text = "يرجى إدخال اسم المنتج المطلوب"; binding.requestedProductError.visibility = View.VISIBLE; isValid = false }
+        if (category == "-اختر-") { binding.categoryError.text = "يرجى اختيار القسم"; binding.categoryError.visibility = View.VISIBLE; isValid = false }
+        if (location == "-اختر-") { binding.locationError.text = "يرجى اختيار الموقع"; binding.locationError.visibility = View.VISIBLE; isValid = false }
+        if (description.isEmpty()) { binding.descriptionError.text = "يرجى إدخال الوصف"; binding.descriptionError.visibility = View.VISIBLE; isValid = false }
         if (!isValid) return
 
         uploadImagesAndSaveOffer(productName, requestedProduct, category, location, description)
     }
 
-    private fun uploadImagesAndSaveOffer(
-        productName: String,
-        requestedProduct: String,
-        category: String,
-        location: String,
-        description: String
-    ) {
+    private fun uploadImagesAndSaveOffer(productName: String, requestedProduct: String, category: String, location: String, description: String) {
         showLoadingDialog()
-
         val imageStrings = mutableListOf<String>()
-
         selectedImages.forEach { uri ->
             val bitmap: Bitmap = if (Build.VERSION.SDK_INT >= 29) {
                 val source = ImageDecoder.createSource(requireContext().contentResolver, uri)
@@ -225,24 +179,14 @@ class addOfferFragment : Fragment() {
                 @Suppress("DEPRECATION")
                 android.provider.MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
             }
-
             val baos = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos)
-            val encodedImage = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
-            imageStrings.add(encodedImage)
+            imageStrings.add(Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT))
         }
-
         saveOfferToFirestore(productName, requestedProduct, category, location, description, imageStrings)
     }
 
-    private fun saveOfferToFirestore(
-        productName: String,
-        requestedProduct: String,
-        category: String,
-        location: String,
-        description: String,
-        images: List<String>
-    ) {
+    private fun saveOfferToFirestore(productName: String, requestedProduct: String, category: String, location: String, description: String, images: List<String>) {
         val currentUser = auth.currentUser
         val offersCollection = firestore.collection("offers")
         val newDocRef = offersCollection.document()
@@ -254,7 +198,7 @@ class addOfferFragment : Fragment() {
                 val offer = Offers(
                     offerId = offerId,
                     ownerId = currentUser?.uid ?: "user123",
-                    ownerName = name ?: "Sara Abu Kwaik",
+                    ownerName = name,
                     productName = productName,
                     requestedProduct = requestedProduct,
                     category = category,
@@ -266,6 +210,8 @@ class addOfferFragment : Fragment() {
                 newDocRef.set(offer)
                     .addOnSuccessListener {
                         hideLoadingDialog()
+                        addOfferFirestoreNotification()   // واجهة التطبيق + Firestore
+                        showOfferMobileNotification()     // إشعار النظام على الجوال
                         showSuccessDialog()
                     }
                     .addOnFailureListener { e ->
@@ -273,59 +219,89 @@ class addOfferFragment : Fragment() {
                         Toast.makeText(requireContext(), "فشل نشر العرض: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
             }
-
-
-
-
     }
 
+    // ➤ إشعار في Firestore وواجهة التطبيق
+    private fun addOfferFirestoreNotification() {
+        val userId = auth.currentUser?.uid ?: return
+        val notifData = hashMapOf(
+            "userId" to userId,
+            "title" to "تم نشر عرضك بنجاح!",
+            "message" to "سيتم إعلامك عند وصول الطلبات.",
+            "type" to "offer",           // ➤ نوع الإشعار لتحديد الأيقونة في Fragment
+            "createdAt" to com.google.firebase.Timestamp.now(),
+            "seen" to false
+        )
+
+        FirebaseFirestore.getInstance()
+            .collection("notifications")
+            .add(notifData)
+            .addOnSuccessListener { docRef ->
+                // تحديث الواجهة فورًا بدون الحاجة لإعادة تحميل Fragment
+                (activity as? MainActivity)?.let {
+                    val notification = Notification(
+                        iconRes = R.drawable.offer,
+                        title = "تم نشر عرضك بنجاح!",
+                        message = "سيتم إعلامك عند وصول الطلبات.",
+                        timeText = "الآن",
+                        seen = false
+                    )
+                    // إذا أردت تحديث RecyclerView مباشرة يمكن عمله هنا
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "فشل إنشاء إشعار: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    // ➤ إشعار نظامي على شريط الهاتف
+    private fun showOfferMobileNotification() {
+        val notificationId = (System.currentTimeMillis() % Int.MAX_VALUE).toInt() // ID فريد
+        NotificationHelper.showNotification(
+            requireContext(),
+            "تم نشر عرضك بنجاح!",
+            "سيتم إعلامك عند وصول الطلبات.",
+            notificationId,
+            R.drawable.swapit
+        )
+    }
 
     private fun showLoadingDialog() {
         val progressBar = ProgressBar(requireContext()).apply { isIndeterminate = true }
-
         val container = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            setPadding(50, 50, 50, 50)
+            setPadding(50,50,50,50)
             addView(progressBar)
             addView(TextView(requireContext()).apply {
                 text = "جاري نشر العرض..."
                 textSize = 18f
                 setTextColor(Color.BLACK)
-                setPadding(0, 20, 0, 0)
+                setPadding(0,20,0,0)
                 gravity = Gravity.CENTER
             })
         }
-
         loadingDialog = MaterialAlertDialogBuilder(requireContext())
             .setView(container)
             .setCancelable(false)
             .create()
-
         loadingDialog?.show()
     }
 
-    private fun hideLoadingDialog() {
-        loadingDialog?.dismiss()
-        loadingDialog = null
-    }
-
+    private fun hideLoadingDialog() { loadingDialog?.dismiss(); loadingDialog = null }
 
     private fun showSuccessDialog() {
         val container = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(50, 50, 50, 20)
+            setPadding(50,50,50,20)
         }
-
         val message = TextView(requireContext()).apply {
             text = "🎉 تم نشر العرض بنجاح!\n\nهل ترغب بالذهاب إلى الصفحة الرئيسية؟"
             textSize = 20f
             setTextColor(Color.BLACK)
             gravity = Gravity.CENTER
         }
-
         container.addView(message)
-
         val dialog = MaterialAlertDialogBuilder(requireContext())
             .setView(container)
             .setPositiveButton("الذهاب إلى الرئيسية") { _, _ ->
@@ -333,21 +309,11 @@ class addOfferFragment : Fragment() {
                 val action = addOfferFragmentDirections.actionAddOfferFragmentToHomeFragment()
                 findNavController().navigate(action)
             }
-            .setNegativeButton("البقاء هنا") { dialogInterface, _ ->
-                dialogInterface.dismiss()
-            }
+            .setNegativeButton("البقاء هنا") { dialogInterface, _ -> dialogInterface.dismiss() }
             .create()
-
         dialog.show()
-
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.apply {
-            setTextColor(Color.parseColor("#F9BC25"))
-            textSize = 18f
-        }
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.apply {
-            setTextColor(Color.GRAY)
-            textSize = 18f
-        }
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.apply { setTextColor(Color.parseColor("#F9BC25")); textSize = 18f }
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.apply { setTextColor(Color.GRAY); textSize = 18f }
     }
 
     private fun clearForm() {
@@ -359,7 +325,6 @@ class addOfferFragment : Fragment() {
         binding.productNameEditText.text?.clear()
         binding.requestedProductEditText.text?.clear()
         binding.descriptionEditText.text?.clear()
-
         binding.productNameError.visibility = View.GONE
         binding.requestedProductError.visibility = View.GONE
         binding.categoryError.visibility = View.GONE

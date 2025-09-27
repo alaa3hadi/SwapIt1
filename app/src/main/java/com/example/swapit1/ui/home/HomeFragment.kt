@@ -1,6 +1,8 @@
 // app/src/main/java/com/example/swapit1/ui/home/HomeFragment.kt
 package com.example.swapit1.ui.home
 
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.Editable
@@ -24,6 +26,8 @@ import com.example.swapit1.model.AreaItem
 import com.example.swapit1.model.CardItem
 import com.example.swapit1.model.CategoryItem
 import com.example.swapit1.model.Search
+import com.example.swapit1.ui.myAccount.privacy_policy
+import com.example.swapit1.ui.notifications.NotificationsFragment
 import com.example.swapit1.ui.search.FilterBottomSheet
 import com.example.swapit1.ui.search.FilterOptions
 import com.example.swapit1.ui.search.SortOption
@@ -38,7 +42,8 @@ class HomeFragment : Fragment() {
     // Firebase (بدون lazy)
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
-
+    // Listener للإشعارات غير المقروءة
+    private var notificationsListener: ListenerRegistration? = null
     // User
     private var userId: String = "guest"
     private var userName: String = "guest_user"
@@ -156,6 +161,12 @@ class HomeFragment : Fragment() {
             findNavController().navigate(action)
         }
 
+
+        //gghkjrhg gghauhvhj
+
+        binding.notificationIcon.setOnClickListener {
+            findNavController().navigate(R.id.navigation_notifications)
+        }
         // فلتر
         binding.btnFilter.setOnClickListener {
             FilterBottomSheet(currentFilters, locationsList, categoriesList) { f ->
@@ -207,6 +218,19 @@ class HomeFragment : Fragment() {
                 binding.userName.text = "مرحباً بك، $name"
                 val loc = doc?.getString("location")
                 userArea = if (loc.isNullOrBlank()) null else loc
+                //➤ تحميل صورة المستخدم من Base64 إذا موجودة
+                val photoBase64 = doc?.getString("photoBase64")
+                if (!photoBase64.isNullOrEmpty()) {
+                    try {
+                        val bytes = android.util.Base64.decode(photoBase64, android.util.Base64.DEFAULT)
+                        val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                        binding.userImage.setImageBitmap(bitmap)
+                    } catch (e: Exception) {
+                        binding.userImage.setImageResource(R.drawable.user_icon) // افتراضي لو فشل التحويل
+                    }
+                } else {
+                    binding.userImage.setImageResource(R.drawable.user_icon) // صورة افتراضية
+                }
 
                 // كل مرة تتغير منطقة المستخدم نعيد الاستماع للقسم
                 listenAreaFeed(userArea)
@@ -437,6 +461,34 @@ class HomeFragment : Fragment() {
         binding.searchResultsRecyclerView.visibility = if (showSearch) View.VISIBLE else View.GONE
     }
 
+
+
+    private fun listenUnreadNotifications() {
+        val currentUserId = auth.currentUser?.uid ?: return
+
+        // أوقف أي listener قديم
+        notificationsListener?.remove()
+
+        notificationsListener = db.collection("notifications")
+            .whereEqualTo("userId", currentUserId)
+            .whereEqualTo("seen", false)
+            .addSnapshotListener { snapshot, error ->
+                if (_binding == null) return@addSnapshotListener
+                if (error != null) return@addSnapshotListener
+
+                val unreadCount = snapshot?.size() ?: 0
+                binding.notificationBadge.apply {
+                    if (unreadCount > 0) {
+                        visibility = View.VISIBLE
+                        text = unreadCount.toString()
+                    } else {
+                        visibility = View.GONE
+                    }
+                }
+            }
+    }
+
+
     override fun onDestroyView() {
         super.onDestroyView()
         // أوقف كل الـ listeners عشان ما يضلوا شغالين
@@ -450,5 +502,9 @@ class HomeFragment : Fragment() {
         searchDebounce = null
 
         _binding = null
+    }
+    override fun onResume() {
+        super.onResume()
+        listenUnreadNotifications()
     }
 }
