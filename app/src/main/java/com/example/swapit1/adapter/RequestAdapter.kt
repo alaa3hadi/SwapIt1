@@ -23,9 +23,11 @@ import android.util.Base64
 import android.widget.Button
 import androidx.cardview.widget.CardView
 import com.example.swapit1.edit.edit_request
+
 import com.example.swapit1.model.Request
 import com.example.swapit1.ui.details.My_Request_Details
 import com.example.swapit1.ui.details.request_details
+import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
 import java.io.FileOutputStream
 
@@ -98,7 +100,13 @@ class RequestAdapter(
             popup.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.menu_edit -> {
-                        val intent = Intent(context, edit_request ::class.java)
+                        val intent = Intent(context, edit_request::class.java)
+                        intent.putExtra("requestId", item.requestId)
+                        intent.putExtra("productName", item.productName)
+                        intent.putExtra("category", item.category)
+                        intent.putExtra("location", item.location)
+                        intent.putStringArrayListExtra("images", ArrayList(item.images))
+                        intent.putExtra("description", item.description)
                         context.startActivity(intent)
                         true
                     }
@@ -120,8 +128,22 @@ class RequestAdapter(
 
                         btnDelete.setOnClickListener {
                             alertDialog.dismiss()
-                            // TODO: احذفي العنصر من القائمة أو اعملي له حذف من السيرفر
-                            Toast.makeText(context, "تم حذف العرض: ${item.productName}", Toast.LENGTH_SHORT).show()
+
+                            val firestore = FirebaseFirestore.getInstance()
+
+                            item.requestId?.let { id ->
+                                firestore.collection("requests")
+                                    .document(id)
+                                    .delete()
+                                    .addOnSuccessListener {
+                                        Toast.makeText(context, "تم حذف الطلب: ${item.productName}", Toast.LENGTH_SHORT).show()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        Toast.makeText(context, "فشل الحذف: ${e.message}", Toast.LENGTH_SHORT).show()
+                                    }
+                            } ?: run {
+                                Toast.makeText(context, "خطأ: لم يتم العثور على معرف الطلب", Toast.LENGTH_SHORT).show()
+                            }
                         }
 
                         alertDialog.show()

@@ -1,6 +1,8 @@
 package com.example.swapit1.ui.addOffer
 
+import android.animation.Animator
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -13,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.fragment.findNavController
 import com.example.swapit1.NotificationHelper
 import com.example.swapit1.R
 import com.example.swapit1.adapter.SelectedImagesPagerAdapter
@@ -315,8 +318,7 @@ class addRequest : FragmentActivity() {
                     (System.currentTimeMillis() % Int.MAX_VALUE).toInt(),
                     R.drawable.swapit // 🔹 أيقونة التطبيق أو أيقونة خاصة للطلبات
                 )
-                Toast.makeText(this, "تم إرسال الطلب بنجاح!", Toast.LENGTH_LONG).show()
-                finish()
+
             }
             .addOnFailureListener { e ->
                 hideLoadingDialog()
@@ -359,31 +361,53 @@ class addRequest : FragmentActivity() {
 
     private fun showSuccessDialog() {
         val container = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL; setPadding(
-            50,
-            50,
-            50,
-            20
-        )
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            setPadding(50, 50, 50, 50)
         }
+
+        // 🔹 Lottie Animation
+        val animationView = com.airbnb.lottie.LottieAnimationView(this).apply {
+            setAnimation(R.raw.success) // ملفك داخل res/raw
+            repeatCount = 0             // يشتغل مرة وحدة فقط
+            playAnimation()
+            layoutParams = LinearLayout.LayoutParams(400, 400).apply {
+                gravity = Gravity.CENTER
+            }
+        }
+
+        // 🔹 نص تحت الأنيميشن
         val message = TextView(this).apply {
-            text = "🎉 تم نشر الطلب بنجاح!\n\nهل ترغب بالذهاب إلى الصفحة الرئيسية؟"
-            textSize = 20f; setTextColor(android.graphics.Color.BLACK); gravity = Gravity.CENTER
+            text = "تم نشر الطلب بنجاح"
+            textSize = 20f
+            setTextColor(android.graphics.Color.BLACK)
+            gravity = Gravity.CENTER
+            setPadding(0, 30, 0, 0)
         }
+
+        container.addView(animationView)
         container.addView(message)
 
         val dialog = MaterialAlertDialogBuilder(this)
             .setView(container)
-            .setPositiveButton("الذهاب إلى الرئيسية") { _, _ -> clearForm(); finish() }
-            .setNegativeButton("البقاء هنا") { dialogInterface, _ -> dialogInterface.dismiss() }
+            .setCancelable(false) // ما يقدر يسكر يدوي
             .create()
 
         dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            ?.setTextColor(android.graphics.Color.parseColor("#F9BC25"))
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(android.graphics.Color.GRAY)
-    }
 
+        // 🔹 بعد ما يخلص الأنيميشن -> يسكر ويرجع
+        animationView.addAnimatorListener(object : android.animation.Animator.AnimatorListener {
+            override fun onAnimationEnd(p0: Animator) {
+                dialog.dismiss()
+                clearForm()
+                finish()
+            }
+
+            override fun onAnimationStart(p0: Animator) {}
+            override fun onAnimationCancel(p0: Animator) {}
+            override fun onAnimationRepeat(p0: Animator) {}
+        })
+    }
     private fun clearForm() {
         selectedImages.clear()
         pagerAdapter.notifyDataSetChanged()

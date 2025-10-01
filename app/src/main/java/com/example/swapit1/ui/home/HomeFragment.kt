@@ -267,7 +267,9 @@ class HomeFragment : Fragment() {
                        images = listOfNotNull(imgs?.firstOrNull()),
                         productName = d.getString("productName") ?: "—",
                         requestedProduct = d.getString("requestedProduct") ?: "—",
-                        createdAt = d.getTimestamp("createdAt")
+                        createdAt = d.getTimestamp("createdAt"),
+                        ownerId = d.getString("ownerId") ?: "—",
+                        ownerName = d.getString("ownerName") ?: "—"
                     )
                 )
             }

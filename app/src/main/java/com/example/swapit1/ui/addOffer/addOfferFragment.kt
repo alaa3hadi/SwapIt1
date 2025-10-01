@@ -293,29 +293,48 @@ class addOfferFragment : Fragment() {
     private fun showSuccessDialog() {
         val container = LinearLayout(requireContext()).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(50,50,50,20)
+            setPadding(50, 50, 50, 20)
+            gravity = Gravity.CENTER
         }
+
+        // 🎬 Lottie Animation أكبر
+        val animationView = com.airbnb.lottie.LottieAnimationView(requireContext()).apply {
+            setAnimation(R.raw.success)   // ملف success.json في res/raw
+            repeatCount = 0               // مرة واحدة
+            playAnimation()
+            layoutParams = LinearLayout.LayoutParams(350, 350).apply {
+                gravity = Gravity.CENTER
+                bottomMargin = 30
+            }
+        }
+
+        // 📝 النص
         val message = TextView(requireContext()).apply {
-            text = "🎉 تم نشر العرض بنجاح!\n\nهل ترغب بالذهاب إلى الصفحة الرئيسية؟"
+            text = "تم نشر العرض بنجاح"
             textSize = 20f
             setTextColor(Color.BLACK)
             gravity = Gravity.CENTER
         }
+
+        container.addView(animationView)
         container.addView(message)
+
+        // 📌 دايلوغ بدون أزرار
         val dialog = MaterialAlertDialogBuilder(requireContext())
             .setView(container)
-            .setPositiveButton("الذهاب إلى الرئيسية") { _, _ ->
-                clearForm()
-                val action = addOfferFragmentDirections.actionAddOfferFragmentToHomeFragment()
-                findNavController().navigate(action)
-            }
-            .setNegativeButton("البقاء هنا") { dialogInterface, _ -> dialogInterface.dismiss() }
+            .setCancelable(false) // المستخدم ما يقدر يسكر الدايلوغ
             .create()
-        dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.apply { setTextColor(Color.parseColor("#F9BC25")); textSize = 18f }
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.apply { setTextColor(Color.GRAY); textSize = 18f }
-    }
 
+        dialog.show()
+
+        // ⏳ بعد 2.5 ثانية يروح عالصفحة الرئيسية
+        container.postDelayed({
+            dialog.dismiss()
+            clearForm()
+            val action = addOfferFragmentDirections.actionAddOfferFragmentToHomeFragment()
+            findNavController().navigate(action)
+        }, 2500) // 2500 ms = 2.5 ثانية
+    }
     private fun clearForm() {
         selectedImages.clear()
         pagerAdapter.notifyDataSetChanged()

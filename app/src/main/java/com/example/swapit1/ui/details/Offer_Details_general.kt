@@ -1,5 +1,6 @@
 package com.example.swapit1.ui.details
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -20,6 +21,7 @@ class Offer_Details_general : AppCompatActivity() {
     private lateinit var binding: ActivityOfferDetailsGeneralBinding
     private val db = FirebaseFirestore.getInstance()
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

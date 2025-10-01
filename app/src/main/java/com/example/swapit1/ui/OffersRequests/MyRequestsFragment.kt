@@ -56,7 +56,7 @@ class MyRequestsFragment : Fragment() {
                         request
                     }
 
-                    Toast.makeText(requireContext(), "عدد العروض: ${requests.size}", Toast.LENGTH_SHORT).show()
+
 
                     listView.visibility = View.VISIBLE
                     emptyLayout.visibility = View.GONE

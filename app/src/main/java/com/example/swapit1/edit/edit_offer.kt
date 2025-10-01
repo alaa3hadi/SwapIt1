@@ -1,5 +1,6 @@
 package com.example.swapit1.edit
 
+import android.animation.Animator
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
@@ -8,13 +9,20 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
+import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.swapit1.R
 import com.example.swapit1.adapter.SelectedImagesPagerAdapter
 import com.example.swapit1.databinding.ActivityEditOfferBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.ByteArrayOutputStream
@@ -24,7 +32,7 @@ class edit_offer : AppCompatActivity() {
     private lateinit var binding: ActivityEditOfferBinding
     private val firestore = FirebaseFirestore.getInstance()
     private val auth = FirebaseAuth.getInstance()
-
+    private var loadingDialog: AlertDialog? = null
     private val selectedImages = mutableListOf<Uri>() // صور جديدة
     private val allImages = mutableListOf<Any>() // صور قديمة Base64 أو Bitmaps
     private val bitmaps = mutableListOf<Any>() // للعرض فقط
@@ -57,6 +65,8 @@ class edit_offer : AppCompatActivity() {
 
         setupSpinners()
         setupViewPager()
+
+        binding.backButton.setOnClickListener { finish() }
 
         binding.addPhotoLayout.setOnClickListener { openImagePicker() }
         binding.bottom.setOnClickListener { updateOffer() }
@@ -203,13 +213,14 @@ class edit_offer : AppCompatActivity() {
             "description" to description,
             "images" to imageStrings
         )
+        showLoadingDialog()
 
         offerId?.let {
             firestore.collection("offers").document(it)
                 .update(updates)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "تم تعديل العرض ✅", Toast.LENGTH_SHORT).show()
-                    finish()
+                    hideLoadingDialog()
+                    showSuccessDialog()
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "فشل التعديل: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -217,4 +228,79 @@ class edit_offer : AppCompatActivity() {
         }
     }
 
+    private fun showLoadingDialog() {
+        val progressBar = ProgressBar(this).apply { isIndeterminate = true }
+        val container = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            setPadding(50, 50, 50, 50)
+            addView(progressBar)
+            addView(TextView(this@edit_offer).apply {
+                text = "جاري تعديل العرض..."
+                textSize = 18f
+                setTextColor(android.graphics.Color.BLACK)
+                gravity = Gravity.CENTER
+                setPadding(0, 20, 0, 0)
+            })
+        }
+        loadingDialog = MaterialAlertDialogBuilder(this)
+            .setView(container)
+            .setCancelable(false)
+            .create()
+        loadingDialog?.show()
+    }
+
+    private fun hideLoadingDialog() {
+        loadingDialog?.dismiss()
+        loadingDialog = null
+    }
+
+    private fun showSuccessDialog() {
+        val container = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            setPadding(50, 50, 50, 50)
+        }
+
+        // 🔹 Lottie Animation
+        val animationView = com.airbnb.lottie.LottieAnimationView(this).apply {
+            setAnimation(R.raw.success) // ملفك داخل res/raw
+            repeatCount = 0             // يشتغل مرة وحدة فقط
+            playAnimation()
+            layoutParams = LinearLayout.LayoutParams(400, 400).apply {
+                gravity = Gravity.CENTER
+            }
+        }
+
+        // 🔹 نص تحت الأنيميشن
+        val message = TextView(this).apply {
+            text = "تم تعديل العرض بنجاح"
+            textSize = 20f
+            setTextColor(android.graphics.Color.BLACK)
+            gravity = Gravity.CENTER
+            setPadding(0, 30, 0, 0)
+        }
+
+        container.addView(animationView)
+        container.addView(message)
+
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(container)
+            .setCancelable(false) // ما يقدر يسكر يدوي
+            .create()
+
+        dialog.show()
+
+        // 🔹 بعد ما يخلص الأنيميشن -> يسكر ويرجع
+        animationView.addAnimatorListener(object : android.animation.Animator.AnimatorListener {
+            override fun onAnimationEnd(p0: Animator) {
+                dialog.dismiss()
+                finish()
+            }
+
+            override fun onAnimationStart(p0: Animator) {}
+            override fun onAnimationCancel(p0: Animator) {}
+            override fun onAnimationRepeat(p0: Animator) {}
+        })
+    }
 }
