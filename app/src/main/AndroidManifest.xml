@@ -82,7 +82,9 @@
             />
         <activity android:name=".Onboarding.SplashActivity"
             android:exported="true"
-            android:label="SwapIt">
+            android:theme="@style/Theme.SwapIt1.Splash">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

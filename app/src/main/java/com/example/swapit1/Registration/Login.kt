@@ -2,10 +2,17 @@
 package com.example.swapit1.Registration
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.widget.doOnTextChanged
 import com.example.swapit1.MainActivity
 import com.example.swapit1.NotificationHelper
@@ -13,6 +20,7 @@ import com.example.swapit1.R
 import com.example.swapit1.Registration.SignUpActivity
 import com.example.swapit1.auth.AuthAlias
 import com.example.swapit1.databinding.ActivityLoginBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.*
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -21,6 +29,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private val db: FirebaseFirestore by lazy { FirebaseFirestore.getInstance() }
+    private var loadingDialog: AlertDialog? = null
 
     // مفاتيح SharedPreferences
     private val PREFS_NAME = "app_prefs"
@@ -137,16 +146,20 @@ class LoginActivity : AppCompatActivity() {
      * وعند النجاح يحفظ UID في SharedPreferences ثم يذهب للصفحة الرئيسية.
      */
     private fun signInWithAlias(aliasEmail: String, password: String) {
+        showLoadingDialog()
+
         Log.d("LOGIN", "signIn alias=$aliasEmail")
         auth.signInWithEmailAndPassword(aliasEmail, password)
-            .addOnSuccessListener { cred ->
+            .addOnSuccessListener {
+
+                    cred ->
                 val uid = cred.user?.uid ?: auth.currentUser?.uid
                 if (!uid.isNullOrEmpty()) {
                     saveUserId(uid)
                 }
                 // ➤ إشعار على واجهة التطبيق وFirestore مع type = "login"
                 addLoginNotification(uid ?: return@addOnSuccessListener)
-
+                loadingDialog?.dismiss()
                 // ➤ إشعار نظامي على الجوال
                 NotificationHelper.showNotification(
                     this,
@@ -161,6 +174,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnFailureListener { ex ->
                 val code = (ex as? FirebaseAuthException)?.errorCode ?: "NO_CODE"
                 Log.e("LOGIN", "signIn failed: alias=$aliasEmail type=${ex::class.java.simpleName} code=$code msg=${ex.localizedMessage}", ex)
+                loadingDialog?.dismiss()  // إخفاء الـ Dialog عند الفشل
 
                 when {
                     // كلمة المرور/الاعتماد غير صحيحة → نفس الرسالة على الحقلين
@@ -196,6 +210,27 @@ class LoginActivity : AppCompatActivity() {
             .edit()
             .putString(KEY_USER_ID, uid)
             .apply()
+    }
+    private fun showLoadingDialog() {
+        val progressBar = ProgressBar(this).apply { isIndeterminate = true }
+        val container = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            setPadding(50,50,50,50)
+            addView(progressBar)
+            addView(TextView(context).apply {
+                text = "جاري تسجيل الدخول..."
+                textSize = 18f
+                setTextColor(Color.BLACK)
+                setPadding(0,20,0,0)
+                gravity = Gravity.CENTER
+            })
+        }
+        loadingDialog = MaterialAlertDialogBuilder(this)
+            .setView(container)
+            .setCancelable(false)
+            .create()
+        loadingDialog?.show()
     }
 
 

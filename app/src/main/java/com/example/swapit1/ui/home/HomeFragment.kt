@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
     // Filters
     private var currentFilters = FilterOptions()
     private val locationsList  = listOf("شمال غزة", "غزة", "الوسطى", "خانيونس", "رفح")
-    private val categoriesList = listOf("اطفال", "أثاث", "طعام", "ملابس", "إلكترونيات","اخرى")
+    private val categoriesList = listOf("اطفال", "اثاث", "طعام", "ملابس", "الكترونيات","اخرى")
     private val SEARCH_FIELD = "productName"
 
     // ثابتة للتصنيفات
@@ -195,7 +195,8 @@ class HomeFragment : Fragment() {
         // تحميل حي لاسم/منطقة المستخدم ثم خلاصات حيّة
         listenUserAndFeeds()
 
-        return binding.root
+        return binding.
+        root
     }
 
     /** استماع لدوكيومنت المستخدم (لو مسجل) */
@@ -264,7 +265,7 @@ class HomeFragment : Fragment() {
                 list.add(
                     AreaItem(
                         location = area ?: (d.getString("location") ?: "—"),
-                       images = listOfNotNull(imgs?.firstOrNull()),
+                        images = listOfNotNull(imgs?.firstOrNull()),
                         productName = d.getString("productName") ?: "—",
                         requestedProduct = d.getString("requestedProduct") ?: "—",
                         createdAt = d.getTimestamp("createdAt"),
@@ -304,7 +305,9 @@ class HomeFragment : Fragment() {
     /** بحث + فلاتر “لايف” (بدون get) */
     private fun runSearchLive(filters: FilterOptions, raw: String) {
         val text = raw.trim()
-        val wantSearch = text.isNotEmpty() || !filters.location.isNullOrBlank() || !filters.category.isNullOrBlank() || filters.sort != SortOption.NEWEST
+        val wantSearch = text.isNotEmpty()
+        !filters.location.isNullOrBlank()
+        !filters.category.isNullOrBlank() || filters.sort != SortOption.NEWEST
         updateSectionVisibility(wantSearch)
 
         // أوقف أي Listener قديم للبحث

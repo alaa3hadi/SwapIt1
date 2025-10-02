@@ -1,9 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#FFFFFF">
+
+    <!-- شيمر تحميل -->
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:shimmer_auto_start="true"
+        android:visibility="visible">
+
+        <!-- يمكنك تصميم شكل الشيمر هنا، مثلاً مستطيلات تحاكي عناصر القائمة -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/skeleton_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/skeleton_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/skeleton_bg" />
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <ListView
         android:id="@+id/cardListView"
@@ -16,7 +49,7 @@
         android:paddingEnd="16dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="16dp"
-         />
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/emptyLayout"
@@ -27,16 +60,13 @@
         android:visibility="gone"
         android:padding="16dp">
 
-        <!-- ✅ الصورة -->
         <ImageView
             android:id="@+id/emptyImage"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:src="@drawable/swapit2"
+            android:contentDescription="صورة توضيحية" />
 
-        android:contentDescription="صورة توضيحية" />
-
-        <!-- ✅ النص -->
         <TextView
             android:id="@+id/emptyMessage"
             android:layout_width="wrap_content"
@@ -47,17 +77,15 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="16dp" />
 
-        <!-- ✅ الزر -->
         <Button
             android:id="@+id/addOfferButton"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:text="إضافة عرض"
+            android:text="إضافة عرض كله"
             android:textSize="16sp"
             android:backgroundTint="@color/YellowDark"
             app:cornerRadius="20dp"
             android:textColor="@android:color/black"/>
     </LinearLayout>
-
 
 </RelativeLayout>
